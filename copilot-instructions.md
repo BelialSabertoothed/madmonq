@@ -1,0 +1,1 @@
+/Users/barborasimordova/Documents/GitHub/madmonq/AGENTS.md
