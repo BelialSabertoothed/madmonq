@@ -1,0 +1,101 @@
+<div class="hero-banner full-width">
+  <div class="hero-banner__content">
+    <div class="hero-banner__text-column">
+      <h1 class="hero-banner__heading">{{ section.settings.heading_text | newline_to_br }}</h1>
+      
+      <a href="{{ section.settings.button_link }}" class="hero-banner__button">
+        {{ 'icon_shape.svg' | inline_asset_content }}
+        {{ section.settings.button_label }}
+      </a>
+    </div>
+
+    <div class="hero-banner__image-column">
+      {% if section.settings.hero_image != blank %}
+        {% render 'image', 
+          image: section.settings.hero_image, 
+          class: 'hero-banner__floating-hex' 
+        %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  /* This CSS is only loaded when this specific section is on the page */
+  .hero-banner {
+    background: radial-gradient(circle at center, #1a0b2e 0%, #0d0e15 80%);
+    color: #ffffff;
+    padding: 120px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-banner__heading {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+  .hero-banner__button {
+    background-color: #886ED9; 
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* Adds space between the icon and the text */
+    
+    transition: transform 0.2s ease;
+  }
+  .hero-banner__button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Add this to control the size of your SVG icon */
+  .hero-banner__button svg {
+    width: 24px;
+    height: 24px;
+    /* Forces the SVG to match the text color (white) */
+    fill: currentColor; 
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading_text",
+      "label": "Heading",
+      "default": "YOU CAN'T PERFORM\nWITHOUT FOCUS."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "BUY MADMONQ"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}
