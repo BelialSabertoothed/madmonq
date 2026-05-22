@@ -1,18 +1,43 @@
 {% style %}
-  {% # Loads all font variantions with display: swap %}
+  @font-face {
+    font-family: 'Vanguard CF';
+    src: url('{{ "VanguardCF-Bold.woff2" | asset_url }}') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
   {{ settings.type_primary_font | font_face: font_display: 'swap' }}
   {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  
+  {{ settings.type_heading_font | font_face: font_display: 'swap' }}
 
   :root {
     --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
     --font-primary--style: {{ settings.type_primary_font.style }};
     --font-primary--weight: {{ settings.type_primary_font.weight }};
+    
+    --font-heading--family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+
     --page-width: {{ settings.max_page_width }};
     --page-margin: {{ settings.min_page_margin }}px;
+    
     --color-background: {{ settings.background_color }};
     --color-foreground: {{ settings.foreground_color }};
+    --color-accent: {{ settings.accent_color }}; 
+    
     --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+  }
+
+  body {
+    background-color: var(--color-background);
+    
+    background-image: 
+      url('{{ "Frame 174.png" | asset_url }}'),
+      url('{{ "background-mmq.png" | asset_url }}');
+    
+    background-position: left top, center top;
+    background-repeat: no-repeat, no-repeat;
+    background-size: contain, cover;
+    background-attachment: scroll, fixed; 
   }
 {% endstyle %}

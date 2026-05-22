@@ -1,7 +1,15 @@
-<div class="hero-banner full-width">
-  <div class="hero-banner__content">
-    <div class="hero-banner__text-column">
-      <h1 class="hero-banner__heading">{{ section.settings.heading_text | newline_to_br }}</h1>
+<div class="hero-banner" style="--bg-image: url('{{ "hero-banner.png" | asset_url }}');">
+  <div class="hero-banner__inner">
+    
+    <div class="hero-banner__content">
+      <div class="hero-banner__subtitle">
+        MADMONQ® <span class="hero-banner__subtitle-separator">/</span> <span class="hero-banner__subtitle-light">BEST FOCUS SUPPLEMENT</span>
+      </div>
+      
+      <h1 class="hero-banner__heading">
+        <span class="hero-banner__heading-white">{{ section.settings.heading_line_1 }}</span><br>
+        <span class="hero-banner__heading-purple">{{ section.settings.heading_line_2 }}</span>
+      </h1>
       
       <a href="{{ section.settings.button_link }}" class="hero-banner__button">
         {{ 'icon_shape.svg' | inline_asset_content }}
@@ -9,59 +17,248 @@
       </a>
     </div>
 
-    <div class="hero-banner__image-column">
-      {% if section.settings.hero_image != blank %}
-        {% render 'image', 
-          image: section.settings.hero_image, 
-          class: 'hero-banner__floating-hex' 
-        %}
-      {% endif %}
+    <div class="hero-banner__footer">
+      <div class="hero-banner__features">
+        <div class="feature-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          VERSION 5.0 IS HERE
+        </div>
+        <div class="feature-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          RESIDENTSLEEPER BUNDLE
+        </div>
+        <div class="feature-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          MONQ FLASK GIFT
+        </div>
+      </div>
+
+      <div class="hero-banner__reviews">
+        <div class="reviews-text">
+          <div class="reviews-score">
+            4.84 
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 
+            10K REVIEWS
+          </div>
+          <div class="reviews-sub">Trusted by thousands of verified users</div>
+        </div>
+        <div class="reviews-avatars">
+          <div class="avatar-circle" style="background-image: url('https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png');"></div>
+          <div class="avatar-circle" style="background-image: url('https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png');"></div>
+          <div class="avatar-circle" style="background-image: url('https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png');"></div>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
 {% stylesheet %}
-  /* This CSS is only loaded when this specific section is on the page */
   .hero-banner {
-    background: radial-gradient(circle at center, #1a0b2e 0%, #0d0e15 80%);
-    color: #ffffff;
-    padding: 120px 20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
+    /* 1. vrstva nahoře: Tmavý gradient zleva doprava (barva #000015) */
+    /* 2. vrstva dole: Náš obrázek načtený přes CSS proměnnou */
+    background-image: 
+      linear-gradient(to right, rgba(0,0,21,1) 0%, rgba(0,0,21,1) 20%, rgba(0,0,21,0) 40%),
+      var(--bg-image);
+    background-size: cover, 105%; /* První vrstva (gradient) pokryje celý banner, druhá vrstva (obrázek) bude o něco větší než banner pro lepší pokrytí */
+    
+    /* 120% posune obrázek za pravý okraj. 
+       Zkus si s tímto číslem pohrát (např. 110% až 140%), dokud hexagon nebude přesně tam, kde ho chceš */
+    background-position: left center, -300% 20%;
+
+    background-repeat: no-repeat, no-repeat;
+    
+    width: 82%; 
+    max-width: 1480px;
+    margin: 2rem auto;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    
+    /* Zachováme jemný stín pro splynutí okrajů */
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
   }
-  .hero-banner__heading {
-    font-size: 4rem;
-    font-weight: 900;
+
+  .hero-banner__inner {
+    padding: 160px 5% 40px 5%; 
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  /* --- TEXTOVÁ ČÁST --- */
+  .hero-banner__content {
+    z-index: 2;
+    max-width: 600px; 
+    height: 196px;
+  }
+
+  .hero-banner__subtitle {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #a0a0a0;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-primary--family), sans-serif;
+  }
+  .hero-banner__subtitle-separator {
+    margin: 0 0.5rem;
+    color: #555;
+  }
+  .hero-banner__subtitle-light {
+    color: #777;
+    font-weight: 500;
+  }
+    .hero-banner__heading {
+    /* 1. TYPOGRAFIE Z FIGMY */
+    font-family: 'Vanguard CF', var(--font-heading--family), sans-serif;
+    font-weight: 700;
+    font-size: 100px; /* Přesná velikost z Figmy pro desktop */
+    line-height: 0.96; /* Ve Figmě 96% */
+    letter-spacing: 0;
     text-transform: uppercase;
-    line-height: 1.1;
-    margin-bottom: 2rem;
+    
+    /* 2. LAYOUT A OMEZENÍ */
+    /* Místo fixní 'width: 654px' dáme max-width, aby se na malých displejích text zmenšoval/zalamoval */
+    max-width: 654px; 
+    
+    /* Ve webu nepoužíváme fixní 'height' u textu, výšku přirozeně tvoří font-size a line-height. */
+    /* Místo 'top' a 'left' spoléháme na padding celého vnitřního bloku (který už máme vyřešený) */
+    
+    margin-bottom: 2rem; /* Mezera pod nadpisem před tlačítkem */
+  }
+
+  .hero-banner__heading-white {
+    color: #ffffff;
+  }
+  .hero-banner__heading-purple {
+    color: var(--color-accent); /* Tvá #886ED9 z nastavení */
   }
   .hero-banner__button {
-    background-color: #886ED9; 
-    color: white;
-    padding: 15px 40px;
+    background-color: var(--color-accent);
+    color: #ffffff;
+    padding: 18px 36px;
     border-radius: 50px;
     text-decoration: none;
-    font-family: 'Oswald', sans-serif;
-    font-weight: bold;
+    font-family: var(--font-heading--family), sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px; /* Adds space between the icon and the text */
-    
-    transition: transform 0.2s ease;
+    gap: 12px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    width: max-content;
   }
   .hero-banner__button:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    background-color: #9a83e6;
   }
-  
-  /* Add this to control the size of your SVG icon */
   .hero-banner__button svg {
-    width: 24px;
-    height: 24px;
-    /* Forces the SVG to match the text color (white) */
-    fill: currentColor; 
+
+    fill: currentColor;
+    width: 187px;
+padding-top: 16px;
+padding-right: 24px;
+padding-bottom: 16px;
+padding-left: 24px;
+gap: 16px;
+
+  }
+
+  /* --- SPODNÍ PRUH S VLASTNOSTMI A RECENZEMI --- */
+  .hero-banner__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 60px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    z-index: 2;
+  }
+
+  .hero-banner__features {
+    display: flex;
+    gap: 2rem;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #a0a0a0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .feature-item svg {
+    color: #ffffff;
+  }
+
+  .hero-banner__reviews {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .reviews-text {
+    text-align: right;
+  }
+  .reviews-score {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    font-family: var(--font-heading--family), sans-serif;
+  }
+  .reviews-score svg {
+    margin-bottom: 2px;
+  }
+  .reviews-sub {
+    color: #a0a0a0;
+    font-size: 0.75rem;
+    margin-top: 2px;
+  }
+  .reviews-avatars {
+    display: flex;
+  }
+  .avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #1a0b2e;
+    margin-left: -10px;
+  }
+  .avatar-circle:first-child {
+    margin-left: 0;
+  }
+
+  /* --- RESPONSIVITA --- */
+  @media screen and (max-width: 1924px) {
+    .hero-banner { font-size: 4rem; }
+    .hero-banner__heading { font-size: 70px; }
+    .hero-banner__footer { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .reviews-text { text-align: left; }
+    .reviews-score { justify-content: flex-start; }
+    .hero-banner__button { padding: 14px 28px; font-size: 1rem; }
+    .hero-banner__button svg { width: 20px; padding: 0%; }
+  }
+  @media screen and (max-width: 768px) {
+    .hero-banner { 
+      width: 95%; /* Na mobilech ještě o kousek zvětšíme plochu */
+      background-position: 75% center; /* Jemný posun pozice pro extrémně malé displeje */
+    }
+    .hero-banner__heading { font-size: 48px; line-height: 1; }
+    .hero-banner__features { flex-direction: column; gap: 1rem; }
+    .hero-banner__inner { padding: 120px 20px 20px 20px; }
+    .hero-banner__button { width: 100%; justify-content: center; }
+    .hero-banner__button svg { display: none; } 
   }
 {% endstylesheet %}
 
@@ -70,10 +267,16 @@
   "name": "Hero Banner",
   "settings": [
     {
-      "type": "textarea",
-      "id": "heading_text",
-      "label": "Heading",
-      "default": "YOU CAN'T PERFORM\nWITHOUT FOCUS."
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1 (White)",
+      "default": "YOU CAN'T PERFORM"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2 (Purple)",
+      "default": "WITHOUT FOCUS."
     },
     {
       "type": "text",
@@ -85,11 +288,6 @@
       "type": "url",
       "id": "button_link",
       "label": "Button Link"
-    },
-    {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero Image"
     }
   ],
   "presets": [

@@ -17,8 +17,14 @@
       {
         "type": "font_picker",
         "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
+        "default": "helvetica_n4",
+        "label": "Hlavní text (Body font)"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "default": "oswald_n7",
+        "label": "Nadpisy (Heading font)"
       }
     ]
   },
@@ -30,16 +36,11 @@
         "id": "max_page_width",
         "label": "t:labels.page_width",
         "options": [
-          {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
-          },
-          {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
-          }
+          { "value": "90rem", "label": "t:options.page_width.narrow" },
+          { "value": "92.5rem", "label": "1480px" },
+          { "value": "110rem", "label": "t:options.page_width.wide" }
         ],
-        "default": "90rem"
+        "default": "92.5rem"
       },
       {
         "type": "range",
@@ -65,8 +66,14 @@
       {
         "type": "color",
         "id": "foreground_color",
-        "default": "#333333",
+        "default": "#535353",
         "label": "t:labels.foreground"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "default": "#886ED9",
+        "label": "Akcentová / Brandová barva"
       },
       {
         "type": "range",

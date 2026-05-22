@@ -27,12 +27,23 @@
 </header>
 
 {% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+header {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 100%;
+  z-index: 100;
+  background: transparent;
+  
+  max-width: 1480px;
+  padding: 0 var(--page-margin);
+}
   header a {
     position: relative;
     text-decoration: none;
