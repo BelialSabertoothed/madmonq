@@ -6,7 +6,7 @@
       <div class="hero-banner__content">
         <div class="hero-banner__subtitle">
           MADMONQ<sup>®</sup> <span class="hero-banner__subtitle-separator">/</span>
-          <span class="hero-banner__subtitle-light">BEST FOCUS SUPPLEMENT</span>
+          <span class="hero-banner__subtitle">BEST FOCUS SUPPLEMENT</span>
         </div>
 
         <h1 class="hero-banner__heading">
@@ -16,7 +16,7 @@
 
         <div class="hero-banner__actions">
           <a href="{{ section.settings.button_link }}" class="hero-banner__button">
-            {{ 'icon_shape.svg' | inline_asset_content }}
+            {{ 'icon_basket.svg' | inline_asset_content }}
             {{ section.settings.button_label }}
           </a>
 
@@ -217,7 +217,7 @@
   }
   .hero-banner__button svg {
     fill: currentColor;
-    width: clamp(10px, 2vw, 18px);
+    width: clamp(16px, 2vw, 18px);
   }
 
   .hero-banner__footer {
@@ -330,12 +330,12 @@
     .hero-banner {
       border-radius: 0;
       box-shadow: none;
-      background-image: linear-gradient(to top, rgba(0, 0, 21, 1) 0%, rgba(0, 0, 21, 0) 45%), var(--bg-image);
-      background-size: 250% auto;
+      background-image: linear-gradient(to top, rgba(0, 0, 21, 1) 5%, rgba(0, 0, 21, 0) 55%), var(--bg-image);
+      background-size: 230% auto;
       background-position: bottom center, center;
       background-repeat: no-repeat;
       height: auto;
-      min-height: 85vh;
+      min-height: 80vh;
     }
 
     .hero-banner__rays {
@@ -348,7 +348,7 @@
     .hero-banner__inner {
       padding: 60px 20px 40px 20px;
       justify-content: flex-end;
-      min-height: 85vh;
+      min-height: 90vh;
     }
 
     .hero-banner__content {
@@ -374,7 +374,6 @@
       margin-top: 0;
       padding: 12px 24px;
     }
-
     .hero-banner__reviews-mobil {
       display: flex;
       align-items: center;

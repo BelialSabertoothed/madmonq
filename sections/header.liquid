@@ -1,88 +1,351 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
-
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </shopify-account>
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
-      {% endif %}
-
-      {{ 'icon-cart.svg' | inline_asset_content }}
+<mobile-menu class="header full-width">
+  <div class="header__inner header__inner--desktop">
+    <a href="{{ routes.root_url }}" class="header__logo">
+      <img
+        src="{{ 'madmonq_logo.svg' | asset_url }}"
+        alt="{{ shop.name }}"
+        width="140"
+        height="28"
+        class="header__logo-img"
+      >
     </a>
+
+    <nav class="header__menu">
+      <a href="#" class="header__menu-link"
+        >PRODUCTS
+        <img src="{{ 'Icon - Arrow 2.svg' | asset_url }}" class="icon-arrow" alt="arrow" width="18" height="18"
+      ></a>
+      <a href="#" class="header__menu-link">SUBSCRIPTION</a>
+      <a href="#" class="header__menu-link">ABOUT US</a>
+      <a href="#" class="header__menu-link">MERCH</a>
+      <a href="#" class="header__menu-link">BLOG</a>
+      <a href="#" class="header__menu-link">SCIENCE</a>
+      <a href="#" class="header__menu-link header__menu-link--vip">
+        <img src="{{ 'icon_lock.svg' | asset_url }}" class="icon-lock" alt="lock" width="16" height="20">
+        VIP MASTER CLASS
+      </a>
+    </nav>
+
+    <div class="header__icons">
+      <a href="{{ routes.cart_url }}" class="header__icon">
+        <img src="{{ 'icon_basket.svg' | asset_url }}" alt="Cart" width="20" height="20">
+      </a>
+      <a href="{{ routes.account_url }}" class="header__icon">
+        <img src="{{ 'icon_user.svg' | asset_url }}" alt="Account" width="20" height="20">
+      </a>
+      <div class="header__lang">
+        ENG <img src="{{ 'Icon - Arrow 2.svg' | asset_url }}" class="icon-arrow" alt="arrow" width="18" height="18">
+      </div>
+      <div class="header__profile">
+        <img src="{{ 'icon_mmquser.svg' | asset_url }}" alt="Profile" class="profile-hexagon" width="36" height="36">
+        <div class="header__profile-badge">
+          <img
+            src="{{ 'icon_notification.svg' | asset_url }}"
+            alt="Notification"
+            class="badge-bg"
+            width="18"
+            height="18"
+          >
+          <span class="badge-text">12</span>
+        </div>
+      </div>
+    </div>
   </div>
-</header>
+
+  <div class="header__inner header__inner--mobile">
+    <a href="{{ routes.root_url }}" class="header__logo">
+      <img
+        src="{{ 'madmonq_logo.svg' | asset_url }}"
+        alt="{{ shop.name }}"
+        width="120"
+        height="24"
+        class="header__logo-img"
+      >
+    </a>
+    <div class="header__icons">
+      <a href="{{ routes.cart_url }}" class="header__icon">
+        <img src="{{ 'icon_basket.svg' | asset_url }}" alt="Cart" width="20" height="20">
+      </a>
+      <button type="button" class="header__mobile-toggle" aria-expanded="false" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="header__mobile-nav">
+    <a href="#" class="header__mobile-link">PRODUCTS</a>
+    <a href="#" class="header__mobile-link">SUBSCRIPTION</a>
+    <a href="#" class="header__mobile-link">ABOUT US</a>
+    <a href="#" class="header__mobile-link">MERCH</a>
+    <a href="#" class="header__mobile-link">BLOG</a>
+    <a href="#" class="header__mobile-link">SCIENCE</a>
+    <a href="#" class="header__mobile-link">
+      <img src="{{ 'icon_lock.svg' | asset_url }}" class="icon-lock-mobile" alt="lock" width="16" height="20">
+      VIP MASTER CLASS
+    </a>
+    <a href="#" class="header__mobile-link">
+      <img
+        src="{{ 'icon_mmquser.svg' | asset_url }}"
+        alt="Profile"
+        class="profile-hexagon-mobile"
+        width="20"
+        height="20"
+      >
+      PROFILE
+    </a>
+  </nav>
+</mobile-menu>
 
 {% stylesheet %}
-header {
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  .header {
+    width: 100%;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    z-index: 100;
+    font-family: var(--font-heading--family), sans-serif;
+    display: block;
+  }
 
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%); 
-  width: 100%;
-  z-index: 100;
-  background: transparent;
-  
-  max-width: 1480px;
-  padding: 0 var(--page-margin);
-}
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
+  .header__inner--desktop {
+    display: none;
+  }
+
+  .header__inner--mobile {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    background: #0b0b0f;
+    border-radius: 50px;
+    padding: 12px 20px;
+    margin: 0 var(--page-margin);
+    box-sizing: border-box;
+    width: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 101;
   }
-  header a sup {
+
+  .header__mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: #0b0b0f;
+    border-radius: 35px;
+    padding: 24px 20px;
     position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    margin: 0 var(--page-margin);
+    width: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    gap: 16px;
+    z-index: 100;
   }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
+
+  .header__mobile-nav.is-active {
     display: flex;
-    gap: 1rem;
+  }
+
+  .header__mobile-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    /* Přidaný flexbox pro správné řazení ikony a textu vedle sebe */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .profile-hexagon-mobile {
+    height: 20px;
+    width: auto;
+  }
+
+  .icon-lock-mobile {
+    height: 20px;
+    width: auto;
+  }
+  
+  .header__mobile-link:last-child {
+    border-bottom: none;
+  }
+
+  .header__logo-img {
+    height: 24px;
+    width: auto;
+    display: block;
+  }
+
+  .header__icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header__icon img {
+    height: 20px;
+    width: auto;
+  }
+
+  .header__mobile-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .header__inner--desktop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: clamp(72%, 60vw, 1285px);
+      max-width: 1285px;
+      margin: 0 auto;
+    }
+
+    .header__inner--mobile {
+      display: none;
+    }
+
+    .header__mobile-nav {
+      display: none !important;
+    }
+
+    .header__logo-img {
+      height: 28px;
+    }
+
+    .header__menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .header__menu-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header__menu :hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      color: var(--color-accent);
+    }
+
+    .header__menu-link--vip {
+      gap: 8px;
+    }
+
+    .icon-arrow {
+      width: 18px;
+      height: auto;
+    }
+
+    .icon-lock {
+      width: 16px;
+    }
+
+    .header__icons {
+      gap: 24px;
+    }
+
+    .header__lang {
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .header__profile {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-hexagon {
+      height: 36px;
+      width: auto;
+    }
+
+    .header__profile-badge {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+    }
+
+    .badge-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .badge-text {
+      position: relative;
+      z-index: 2;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: bold;
+      line-height: 1;
+    }
   }
 {% endstylesheet %}
 
+<script>
+  if (!customElements.get('mobile-menu')) {
+    customElements.define(
+      'mobile-menu',
+      class extends HTMLElement {
+        constructor() {
+          super();
+          this.toggleButton = this.querySelector('.header__mobile-toggle');
+          this.mobileNav = this.querySelector('.header__mobile-nav');
+
+          if (this.toggleButton && this.mobileNav) {
+            this.toggleButton.addEventListener('click', this.toggleMenu.bind(this));
+          }
+        }
+
+        toggleMenu() {
+          this.mobileNav.classList.toggle('is-active');
+          const isExpanded = this.mobileNav.classList.contains('is-active');
+          this.toggleButton.setAttribute('aria-expanded', isExpanded);
+        }
+      }
+    );
+  }
+</script>
+
 {% schema %}
 {
-  "name": "t:general.header",
-  "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
-    {
-      "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
-    }
-  ]
+  "name": "Header",
+  "settings": []
 }
 {% endschema %}
