@@ -73,7 +73,7 @@
     max-width: var(--page-width);
     margin: 2rem auto;
     border-radius: 32px; 
-    padding: 2px; 
+    padding: 2px;
     background: linear-gradient(150deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 0.05) 60%, rgba(255, 255, 255, 0.3) 100%);
   }
 
@@ -105,7 +105,7 @@
     z-index: 1;
   }
 
- .hero-banner__highlight-line {
+  .hero-banner__highlight-line {
     position: absolute;
     bottom: 0; 
     left: 15%;
@@ -135,12 +135,6 @@
   }
 
   .hero-banner__heading {
-    font-family: 'Vanguard CF', var(--font-heading--family), sans-serif;
-    font-weight: 700;
-    font-size: clamp(2.5rem, 5vw, 80px);
-    line-height: 0.96;
-    letter-spacing: 0;
-    text-transform: uppercase;
     margin-bottom: clamp(1rem, 2vw, 1.5rem);
   }
 
@@ -150,24 +144,24 @@
     letter-spacing: 0.15em;
     color: #a0a0a0;
     margin-bottom: 1.2rem;
-    font-family: var(--font-heading--family), sans-serif;
   }
 
   .hero-banner__button {
-    padding: clamp(10px, 1.5vw, 16px) clamp(20px, 3vw, 32px);
+    padding: clamp(8px, 1vw, 16px) clamp(16px, 2vw, 24px);
     font-size: clamp(0.85rem, 1.2vw, 1rem);
     background-color: var(--color-accent);
     color: #ffffff;
-    border-radius: 50px;
+    border-radius: 32px;
     text-decoration: none;
-    font-family: var(--font-heading--family), sans-serif;
     font-weight: 700;
+    letter-spacing: -5%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     transition: transform 0.2s ease, background-color 0.2s ease;
     width: fit-content;
+    margin-top: 0.5em;
   }
 
   .hero-banner__subtitle-separator {
@@ -195,7 +189,7 @@
 
   .hero-banner__button svg {
     fill: currentColor;
-    width: clamp(16px, 2.5vw, 24px);
+    width: clamp(10px, 2vw, 18px);
   }
 
   .hero-banner__footer {
@@ -204,7 +198,8 @@
     justify-content: space-between;
     align-items: center;
     margin-top: clamp(30px, 5vw, 60px);
-    padding-top: 20px;
+    padding-top: 5em;
+    padding-bottom: 1em;
     z-index: 2;
     gap: 1.5rem;
   }
@@ -226,7 +221,6 @@
     text-transform: uppercase;
     opacity: 0.3;
     transition: opacity 0.2s ease;
-    font-family: var(--font-heading--family), sans-serif;
   }
 
   .feature-item:first-child {
@@ -252,7 +246,6 @@
     align-items: center;
     justify-content: flex-end;
     gap: 4px;
-    font-family: var(--font-heading--family), sans-serif;
   }
 
   .reviews-score svg {
@@ -314,28 +307,52 @@
 
   @media screen and (max-width: 768px) {
     .hero-banner-wrapper {
-      width: 95%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      border-radius: 0;
     }
+    
     .hero-banner {
-      background-position: center, 75% center;
+      border-radius: 0;
+      background-position: center bottom;
+      background-size: cover; 
     }
-    .hero-banner__heading {
-      line-height: 1;
-    }
-    .hero-banner__features {
-      flex-direction: column;
-      gap: 1rem;
-    }
+
     .hero-banner__inner {
-      padding: clamp(60px, 15vw, 120px) 20px 20px 20px;
+      padding: 120px 20px 40px 20px;
+      justify-content: flex-end;
     }
+
+    .hero-banner__content {
+      max-width: 100%;
+    }
+
     .hero-banner__button {
       width: 100%;
       justify-content: center;
+      margin-top: 1rem;
     }
+
     .hero-banner__button svg {
-      display: none;
+      display: inline-block;
     }
+
+    .hero-banner__footer {
+      display: none; 
+    }
+
+    .hero-banner__highlight-line {
+      left: 20px;
+      width: clamp(80px, 30vw, 150px);
+    }
+  }
+
+  .hero-banner__subtitle,
+  .hero-banner__button,
+  .feature-item,
+  .reviews-score {
+    font-family: var(--font-heading--family), sans-serif;
   }
 {% endstylesheet %}
 

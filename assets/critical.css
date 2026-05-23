@@ -11,6 +11,10 @@ body {
   flex-direction: column;
   margin: 0;
   min-height: 100svh;
+  font-family: var(--font-primary--family), sans-serif;
+  font-size: var(--font-size-body1, 16px);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
@@ -71,11 +75,43 @@ p:empty {
   margin-block-end: 0;
 }
 
-/** Theme styles below */
-body {
-  font-family: var(--font-primary--family);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+h1, .h1 { 
+  font-family: 'Vanguard CF', sans-serif; 
+  font-size: var(--font-size-h1, 80px); 
+  line-height: 0.96; 
+  text-transform: uppercase; 
+  font-weight: 700; 
+  margin-bottom: 0.5em; 
+}
+
+h2, .h2 { 
+  font-family: 'Vanguard CF', sans-serif; 
+  font-size: var(--font-size-h2, 64px); 
+  line-height: 1; 
+  text-transform: uppercase; 
+  font-weight: 700; 
+  margin-bottom: 0.5em; 
+}
+
+h3, .h3 { 
+  font-family: 'Vanguard CF', sans-serif; 
+  font-size: var(--font-size-h3, 48px); 
+  line-height: 1.1; 
+  text-transform: uppercase; 
+  font-weight: 700; 
+  margin-bottom: 0.5em; 
+}
+
+.subtitle-1 { 
+  font-family: var(--font-heading--family), sans-serif; 
+  font-size: var(--font-size-sub1, 20px); 
+  font-weight: 500; 
+  letter-spacing: 0.15em; 
+  text-transform: uppercase; 
+}
+
+.text-small { 
+  font-size: var(--font-size-body2, 14px); 
 }
 
 /** Section layout utilities */
@@ -83,35 +119,25 @@ body {
 /**
  * Setup a grid that enables both full-width and constrained layouts
  * depending on the class of the child elements.
- *
- * By default, a minimum content margin is set on the left and right
- * sides of the section and the content is centered in the viewport to
- * not exceed the maximum page width.
- *
- * When a child element is given the `full-width` class, it will span
- * the entire viewport.
  */
 .shopify-section {
   --content-width: min(
-    calc(var(--page-width) - var(--page-margin) * 2),
-    calc(100% - var(--page-margin) * 2)
+    calc(var(--page-width, 1440px) - var(--page-margin, 20px) * 2),
+    calc(100% - var(--page-margin, 20px) * 2)
   );
-  --content-margin: minmax(var(--page-margin), 1fr);
+  --content-margin: minmax(var(--page-margin, 20px), 1fr);
   --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
 
-  /* This is required to make <img> elements work as background images */
   position: relative;
   grid-template-columns: var(--content-grid);
   display: grid;
   width: 100%;
 }
 
-/* Child elements, by default, are constrained to the central column of the grid. */
 .shopify-section > * {
   grid-column: 2;
 }
 
-/* Child elements that use the full-width utility class span the entire viewport. */
 .shopify-section > .full-width {
   grid-column: 1 / -1;
 }

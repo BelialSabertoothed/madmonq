@@ -8,8 +8,9 @@
   }
   {{ settings.type_primary_font | font_face: font_display: 'swap' }}
   {{ settings.type_primary_font | font_modify: 'weight', 'medium' | font_face: font_display: 'swap' }}
-  
+
   {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+  {{ settings.type_heading_font | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
 
   :root {
     --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
@@ -24,20 +25,28 @@
     --color-background: {{ settings.background_color }};
     --color-foreground: {{ settings.foreground_color }};
     --color-accent: {{ settings.accent_color }}; 
-    
     --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+
+    --font-size-h1: clamp(40px, 4.5vw, 80px);
+    --font-size-h2: clamp(2rem, 4vw + 1rem, 80px);
+    --font-size-h3: clamp(1.75rem, 3.5vw + 1rem, 64px);
+    --font-size-h4: clamp(1.5rem, 2vw + 1rem, 40px);
+
+    --font-size-sub1: clamp(16px, 1.5vw + 10px, 20px);
+    --font-size-sub2: clamp(15px, 1.2vw + 8px, 18px);
+    
+    --font-size-body1: 16px;
+    --font-size-body2: 14px;
   }
 
   body {
     background-color: var(--color-background);
-    
-    background-image: 
+    background-image:
       url('{{ "Frame 174.png" | asset_url }}'),
       url('{{ "background-mmq.png" | asset_url }}');
-    
     background-position: left top, center top;
     background-repeat: no-repeat, no-repeat;
     background-size: contain, cover;
-    background-attachment: scroll, fixed; 
+    background-attachment: scroll, fixed;
   }
 {% endstyle %}
