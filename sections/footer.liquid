@@ -1,36 +1,48 @@
-<footer class="footer">
+<footer class="footer full-width">
   <div class="footer__inner">
     <div class="footer__top">
       <div class="footer__brand">
         <a href="{{ routes.root_url }}">
-          <img src="{{ 'madmonq_logo-1.png' | asset_url }}" alt="MADMONQ" width="160" height="32" loading="lazy" class="footer__logo">
+          <img
+            src="{{ 'madmonq_logo.svg' | asset_url }}"
+            alt="MADMONQ"
+            width="160"
+            height="32"
+            loading="lazy"
+            class="footer__logo"
+          >
         </a>
       </div>
-      
+
       <div class="footer__links-container">
-        <div class="footer__col">
-          <a href="#">BLOG</a>
-          <a href="#">2030 MISSION</a>
-          <a href="#">CAREERS</a>
-          <a href="#">AFFILIATE</a>
+        <div class="footer__links-group">
+          <div class="footer__col col-blog">
+            <a href="#">BLOG</a>
+            <a href="#">2030 MISSION</a>
+            <a href="#">CAREERS</a>
+            <a href="#">AFFILIATE</a>
+          </div>
+          <div class="footer__col col-about">
+            <a href="#">ABOUT US</a>
+            <a href="#">SCIENCE</a>
+            <a href="#">RETURN POLICY</a>
+            <a href="#">VIP MASTER CLASS</a>
+            <a href="#">REVIEWS</a>
+          </div>
         </div>
-        <div class="footer__col">
-          <a href="#">HOMEPAGE</a>
-          <a href="#">PRODUCTS</a>
-          <a href="#">MERCH</a>
-          <a href="#">FAQ</a>
-          <a href="#">CONTACT</a>
-        </div>
-        <div class="footer__col">
-          <a href="#">ABOUT US</a>
-          <a href="#">SCIENCE</a>
-          <a href="#">RETURN POLICY</a>
-          <a href="#">VIP MASTER CLASS</a>
-          <a href="#">REVIEWS</a>
-        </div>
-        <div class="footer__col">
-          <a href="mailto:team@madmonq.gg">TEAM@MADMONQ.GG</a>
-          <a href="mailto:gdpr@madmonq.gg">GDPR@MADMONQ.GG</a>
+
+        <div class="footer__links-group">
+          <div class="footer__col col-home">
+            <a href="#">HOMEPAGE</a>
+            <a href="#">PRODUCTS</a>
+            <a href="#">MERCH</a>
+            <a href="#">FAQ</a>
+            <a href="#">CONTACT</a>
+          </div>
+          <div class="footer__col col-contact">
+            <a href="mailto:team@madmonq.gg">TEAM@MADMONQ.GG</a>
+            <a href="mailto:gdpr@madmonq.gg">GDPR@MADMONQ.GG</a>
+          </div>
         </div>
       </div>
     </div>
@@ -38,22 +50,41 @@
     <div class="footer__middle">
       <div class="footer__newsletter">
         <form class="newsletter-form" action="#">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <img src="{{ 'icon_mail.svg' | asset_url }}" class="icon-mail" alt="Mail" width="24" height="24">
           <input type="email" placeholder="NEWSLETTER" required>
           <button type="submit">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <img
+              src="{{ 'icon_arrow_right.svg' | asset_url }}"
+              class="icon-arrow-right"
+              alt="Submit"
+              width="18"
+              height="18"
+            >
           </button>
         </form>
       </div>
-      
+
       <div class="footer__socials">
-        <a href="#" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.81l.3-4h-4.11V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="#" aria-label="Twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
-        <a href="#" aria-label="Twitch"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"></path></svg></a>
-        <a href="#" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
-        <a href="#" aria-label="Discord"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+        <a href="#" aria-label="Facebook"
+          ><img src="{{ 'icon_facebook.svg' | asset_url }}" alt="Facebook" width="20" height="20"
+        ></a>
+        <a href="#" aria-label="Twitter"
+          ><img src="{{ 'icon_twitter.svg' | asset_url }}" alt="Twitter" width="20" height="20"
+        ></a>
+        <a href="#" aria-label="Twitch"
+          ><img src="{{ 'icon_twitch.svg' | asset_url }}" alt="Twitch" width="20" height="20"
+        ></a>
+        <a href="#" aria-label="YouTube"
+          ><img src="{{ 'icon_youtube.svg' | asset_url }}" alt="YouTube" width="20" height="20"
+        ></a>
+        <a href="#" aria-label="X"
+        ><img src="{{ 'icon_x.svg' | asset_url }}" alt="X" width="20" height="20"></a>
+        <a href="#" aria-label="Instagram"
+          ><img src="{{ 'icon_instagram.svg' | asset_url }}" alt="Instagram" width="20" height="20"
+        ></a>
+        <a href="#" aria-label="TikTok"
+          ><img src="{{ 'icon_tiktok.svg' | asset_url }}" alt="TikTok" width="20" height="20"
+        ></a>
       </div>
     </div>
 
@@ -64,9 +95,11 @@
         <a href="#">COOKIE POLICY</a>
         <a href="#">TERMS & CONDITIONS</a>
       </div>
-      
+
       <div class="footer__lang">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        <a href="#" aria-label="Globe"
+          ><img src="{{ 'icon_globe.svg' | asset_url }}" alt="Globe" width="20" height="20"
+        ></a>
         ENGLISH
       </div>
     </div>
@@ -76,66 +109,54 @@
 {% stylesheet %}
   .footer {
     background-color: #000000;
-    color: #ffffff;
+    color: #52545c;
+    font-weight: 500;
     font-family: var(--font-heading--family), sans-serif;
     padding: 60px var(--page-margin) 40px;
-    border-top: 1px solid rgba(255,255,255,0.1);
   }
-  
+
   .footer__inner {
-      width: clamp(72%, 60vw, 1285px);
-      max-width: 1285px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-  
-  .footer__top {
+    width: 72%;
+    max-width: 1285px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
   }
-  
+
   .footer__logo {
-    height: 32px;
+    height: 40px;
     width: auto;
   }
-  
-  .footer__links-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-  }
-  
+
   .footer__col {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .footer__col a {
-    color: #ffffff;
+    color: #52545c;
+    font-weight: 500;
+    font-size: clamp(12px, 1vw, 15px);
     text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    opacity: 0.6;
-    transition: opacity 0.2s;
+    letter-spacing: 0.02em;
+    transition: color 0.2s, filter 0.2s;
   }
-  
+
   .footer__col a:hover {
-    opacity: 1;
+    color: #ffffff;
   }
-  
+
   .footer__middle {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 24px;
     padding: 32px 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-color: #656a8340;
   }
-  
+
   .newsletter-form {
     display: flex;
     align-items: center;
@@ -143,23 +164,25 @@
     border-radius: 8px;
     padding: 12px 16px;
     gap: 12px;
+    width: 100%;
   }
-  
+
   .newsletter-form input {
     background: transparent;
     border: none;
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 600;
+    color: #52545c;
+    font-weight: 500;
+    font-size: clamp(12px, 1vw, 15px);
     flex: 1;
     outline: none;
     font-family: var(--font-heading--family), sans-serif;
   }
-  
+
   .newsletter-form input::placeholder {
-    color: rgba(255,255,255,0.5);
+    color: #52545c;
+    opacity: 0.7;
   }
-  
+
   .newsletter-form button {
     background: none;
     border: none;
@@ -168,88 +191,148 @@
     display: flex;
     align-items: center;
   }
-  
+
+  .icon-arrow-right {
+    height: 18px;
+  }
+
   .footer__socials {
     display: flex;
     gap: 20px;
     align-items: center;
   }
-  
+
   .footer__socials a {
-    color: #ffffff;
-    opacity: 0.5;
-    transition: opacity 0.2s;
     display: flex;
     align-items: center;
+    opacity: 0.8;
+    transition: filter 0.2s;
   }
-  
+
   .footer__socials a:hover {
-    opacity: 1;
+    filter: brightness(1.5);
   }
-  
-  .footer__bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
-  }
-  
+
   .footer__legal {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.4);
+    font-size: clamp(12px, 1vw, 15px);
+    color: #52545c;
   }
-  
+
   .footer__legal a {
     color: inherit;
     text-decoration: none;
     transition: color 0.2s;
   }
-  
+
   .footer__legal a:hover {
-    color: rgba(255,255,255,0.8);
+    color: #ffffff;
   }
-  
+
   .footer__lang {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: rgba(255,255,255,0.6);
-    font-size: 12px;
-    font-weight: 600;
+    color: #52545c;
+    font-size: clamp(12px, 1vw, 15px);
     cursor: pointer;
   }
-  
+
+  @media screen and (max-width: 1023px) {
+    .footer__top,
+    .footer__bottom {
+      display: contents;
+    }
+
+    .footer__brand {
+      order: 1;
+      margin-bottom: 40px;
+    }
+
+    .footer__links-container {
+      order: 2;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .footer__links-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .col-contact {
+      margin-top: 24px;
+    }
+
+    .footer__middle {
+      order: 3;
+      margin-bottom: 32px;
+    }
+
+    .footer__legal {
+      order: 4;
+    }
+
+    .footer__lang {
+      order: 5;
+      margin-top: 24px;
+    }
+  }
+
   @media screen and (min-width: 1024px) {
     .footer__top {
+      display: flex;
       flex-direction: row;
       justify-content: space-between;
     }
-    
+
     .footer__links-container {
+      display: grid;
       grid-template-columns: repeat(4, auto);
       gap: 64px;
     }
-    
+
+    .footer__links-group {
+      display: contents;
+    }
+
+    .col-blog {
+      order: 1;
+    }
+    .col-home {
+      order: 2;
+    }
+    .col-about {
+      order: 3;
+    }
+    .col-contact {
+      order: 4;
+      margin-top: 0;
+    }
+
     .footer__middle {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      margin: 40px 0;
     }
-    
+
     .footer__newsletter {
       width: 320px;
     }
-    
+
     .footer__bottom {
+      display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
     }
-    
+
     .footer__legal {
       flex-direction: row;
       align-items: center;

@@ -1,14 +1,24 @@
 <mobile-menu class="header full-width">
   <div class="header__inner header__inner--desktop">
     <a href="{{ routes.root_url }}" class="header__logo">
-      <img
-        src="{{ 'madmonq_logo.svg' | asset_url }}"
-        alt="{{ shop.name }}"
-        width="140"
-        height="28"
-        class="header__logo-img"
-      >
-    </a>
+  {% if section.settings.logo != blank %}
+    <img
+      src="{{ section.settings.logo | image_url: width: 280 }}"
+      alt="{{ shop.name }}"
+      width="140"
+      height="28"
+      class="header__logo-img"
+    >
+  {% else %}
+    <img
+      src="{{ 'madmonq_logo.svg' | asset_url }}"
+      alt="{{ shop.name }}"
+      width="140"
+      height="28"
+      class="header__logo-img"
+    >
+  {% endif %}
+</a>
 
     <nav class="header__menu">
       <a href="#" class="header__menu-link"
@@ -157,7 +167,6 @@
     letter-spacing: 0.02em;
     padding: 8px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    /* Přidaný flexbox pro správné řazení ikony a textu vedle sebe */
     display: flex;
     align-items: center;
     gap: 10px;
@@ -222,24 +231,24 @@
     }
 
     .header__logo-img {
-      height: 28px;
+      height: clamp(20px, 2.5vw, 28px);
+      width: auto;
     }
 
     .header__menu {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: clamp(10px, 1.5vw, 24px);
     }
 
     .header__menu-link {
       color: #ffffff;
       text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: clamp(10px, 1vw, 14px);
       letter-spacing: 0.02em;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: clamp(4px, 0.5vw, 6px);
     }
 
     .header__menu :hover {
@@ -262,12 +271,12 @@
     }
 
     .header__icons {
-      gap: 24px;
+      gap: clamp(12px, 1.5vw, 24px);
     }
 
     .header__lang {
       color: #ffffff;
-      font-size: 13px;
+      font-size: clamp(10px, 1vw, 14px);
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -342,10 +351,15 @@
     );
   }
 </script>
-
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo webu"
+    }
+  ]
 }
 {% endschema %}
