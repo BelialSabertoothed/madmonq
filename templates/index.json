@@ -12,9 +12,14 @@
     "main": {
       "type": "hero-banner",
       "settings": {}
+    },
+    "features": {
+      "type": "hexacore",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "features"
   ]
 }

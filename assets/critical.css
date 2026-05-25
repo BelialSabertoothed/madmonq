@@ -122,15 +122,13 @@ h3, .h3 {
  */
 .shopify-section {
   --content-width: min(
-    calc(var(--page-width, 1440px) - var(--page-margin, 20px) * 2),
-    calc(100% - var(--page-margin, 20px) * 2)
+    calc(var(--page-width, 1440px) * 2),
   );
   --content-margin: minmax(var(--page-margin, 20px), 1fr);
   --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
 
   position: relative;
   grid-template-columns: var(--content-grid);
-  display: grid;
   width: 100%;
 }
 
