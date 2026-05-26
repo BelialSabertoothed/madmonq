@@ -1,5 +1,6 @@
 <div class="mmq-hexacore-section" id="Section-{{ section.id }}">
   <div class="mmq-section-top-gradient"></div>
+  <div class="mmq-section-bottom-gradient"></div>
 
   <div class="mmq-section-inner">
     <div class="mmq-visuals-background">
@@ -8,7 +9,16 @@
 
       <div class="mmq-images-container">
         <img
-          src="{{ 'Madm_Body_Neon0000 1.png' | asset_url }}"
+          src="{{ 'Madm_Body_Madmobile.png' | asset_url }}"
+          alt="Madmonq Mobile"
+          class="mmq-img-mobile"
+          loading="lazy"
+          width="800"
+          height="1100"
+        >
+
+        <img
+          src="{{ 'Madm_Body_Neon0000 1.svg' | asset_url }}"
           alt="Madmonq Neon"
           class="mmq-img-neon"
           loading="lazy"
@@ -28,15 +38,28 @@
     </div>
 
     <div class="mmq-content-foreground">
-      {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
-        <div class="mmq-main-heading-wrapper">
-          <h2 class="h2">
-            <span class="mmq-main-heading-white">{{ section.settings.heading_line_1 }}</span>
-            <br>
-            <span class="mmq-main-heading-gray">{{ section.settings.heading_line_2 }}</span>
-          </h2>
-        </div>
-      {%- endif -%}
+      <div class="mmq-main-heading-wrapper">
+        <h2 class="h2 mmq-responsive-heading">
+          {%- if section.settings.heading_line_1 != blank -%}
+            {% assign words = section.settings.heading_line_1 | split: ' ' %}
+            <span class="mmq-main-heading-white">
+              <span class="mmq-mobile-block">{{ words[0] }}</span> 
+              <span class="mmq-mobile-block">{{ words[1] }}</span>
+            </span>
+            <br class="mmq-desktop-only">
+          {%- endif -%}
+          
+          {%- if section.settings.heading_line_2_white != blank or section.settings.heading_line_2_gray != blank -%}
+            <span class="mmq-main-heading-white mmq-mobile-block">{{ section.settings.heading_line_2_white }}</span> 
+            <span class="mmq-main-heading-gray mmq-mobile-block">{{ section.settings.heading_line_2_gray }}</span>
+            <br class="mmq-desktop-only">
+          {%- endif -%}
+          
+          {%- if section.settings.heading_line_3 != blank -%}
+            <span class="mmq-main-heading-gray mmq-mobile-block">{{ section.settings.heading_line_3 }}</span>
+          {%- endif -%}
+        </h2>
+      </div>
 
       <div class="mmq-cards-grid">
         {%- for block in section.blocks -%}
@@ -47,8 +70,8 @@
                   src="{{ block.settings.icon | image_url: width: 120 }}"
                   class="mmq-card-main-icon"
                   alt="{{ block.settings.title | escape }}"
-                  width="44"
-                  height="44"
+                  width="52"
+                  height="52"
                   loading="lazy"
                 >
               {%- endif -%}
@@ -72,9 +95,9 @@
           </div>
         {%- endfor -%}
       </div>
-      {%- assign footer_block = section.blocks | where: 'type', 'footer' | first -%}
-      {%- if footer_block -%}
-        <div class="footer-container" style="margin-top: 60px; display: flex; align-items: center; gap: 12px;">
+      
+      {%- if section.settings.footer_text != blank -%}
+        <div class="footer-container" style="display: flex; align-items: center; gap: 12px;">
           <img
             src="{{ 'hexacore.png' | asset_url }}"
             alt="hexacore"
@@ -83,7 +106,7 @@
             height="24"
             loading="lazy"
           >
-          <p class="mmq-footer-text text-small">{{ footer_block.settings.text }}</p>
+          <p class="mmq-footer-text text-small">{{ section.settings.footer_text }}</p>
         </div>
       {%- endif -%}
     </div>
@@ -95,29 +118,39 @@
     position: relative;
     background-color: #08080a;
     width: 100%;
-    overflow: visible;
-    padding: 60px 20px 80px 20px;
-    z-index: 100;
+    padding: 40px 20px;
+    clip-path: inset(-1000px -1000px 0px -1000px);
   }
 
   .mmq-section-top-gradient {
     position: absolute;
-    top: 0;
+    top: -200px;
     left: 0;
     right: 0;
-    height: 250px;
-    background: linear-gradient(to bottom, rgba(8, 8, 10, 0) 0%, #08080a 100%);
-    transform: translateY(-100%);
+    height: 200px;
+    background: linear-gradient(180deg, rgba(8, 8, 10, 0) 0%, rgba(8, 8, 10, 0.8) 60%, #08080a 100%);
     pointer-events: none;
-    z-index: -1;
+    z-index: 2;
+  }
+
+  .mmq-section-bottom-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80%;
+    background: linear-gradient(0deg, #08080a 50%, rgba(8, 8, 10, 0) 100%);
+    pointer-events: none;
+    z-index: 5;
   }
 
   .mmq-section-inner {
     position: relative;
+    width: 100%;
     max-width: 1440px;
-    margin: 0 auto;
-    min-height: 900px;
+    margin: auto;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
   }
 
@@ -125,201 +158,188 @@
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 760px;
   }
 
   .mmq-main-heading-wrapper {
-    margin-bottom: 56px;
-    max-width: 900px;
+    margin-bottom: 2rem;
+    width: 100%;
+    text-align: left;
   }
 
-  .mmq-main-heading-white {
-    color: #ffffff;
+  .mmq-responsive-heading {
+    font-size: clamp(36px, 10vw, 42px);
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
   }
-  .mmq-main-heading-gray {
-    color: #535353;
+
+  .mmq-mobile-block {
+    display: block;
+    margin-bottom: 4px;
   }
+  .mmq-desktop-only {
+    display: none;
+  }
+
+  .mmq-main-heading-white { color: #ffffff; }
+  .mmq-main-heading-gray { color: #535353; }
 
   .mmq-cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(220px, 1fr));
-    gap: 18px;
+    grid-template-columns: 1fr;
+    gap: 12px;
     position: relative;
     z-index: 20;
+    width: 100%;
   }
 
   .mmq-hexacore-card {
     position: relative;
-    min-height: 118px;
-
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 18px;
-
-    padding: 22px;
-
-    border-radius: 18px;
-
+    gap: 16px;
+    padding: 0.7rem;
+    border-radius: 10px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(20%);
     overflow: hidden;
+    transition: all 0.3s ease;
   }
 
   .mmq-card-icon-square {
     position: relative;
-    width: 68px;
-    height: 68px;
+    width: 60px;
+    height: 60px;
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
+    border: 1.5px solid #FFFFFF05;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-  }
-
-  .mmq-card-icon-square::before,
-  .mmq-card-icon-square::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #ffffff;
-    border-radius: 50%;
-    opacity: 0.8;
-    pointer-events: none;
+    overflow: hidden;
   }
 
   .mmq-card-icon-square::before {
-    top: 6px;
-    right: 6px;
-  }
-  .mmq-card-icon-square::after {
-    bottom: 6px;
-    left: 6px;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(235, 112, 56, 0.45) 0%, rgba(235, 112, 56, 0) 65%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+    border: 1px solid;
+    border-image-source: linear-gradient(225deg, #FA763A 0%, rgba(250, 118, 58, 0) 50%);
   }
 
   .mmq-card-main-icon {
-    width: 44px;
+    position: relative;
+    z-index: 1;
+    width: 44px; 
     height: 44px;
     object-fit: contain;
     transition: filter 0.3s ease;
   }
 
-  .mmq-card-content {
-    flex-grow: 1;
-  }
-
-  .mmq-card-title {
-    color: #ffffff;
-    margin: 0 0 4px 0;
-  }
-
-  .mmq-card-desc {
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0;
-  }
-
+  .mmq-card-content { flex-grow: 1; }
+  .mmq-card-title { color: #ffffff; margin: 0 0 4px 0; font-size: 1.1rem; letter-spacing: -0.5px; }
+  .mmq-card-desc { color: rgba(255, 255, 255, 0.6); margin: 0; font-size: 0.9rem; }
+  
   .mmq-card-corner-icon {
     position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 16px;
-    height: 16px;
+    top: 12px;
+    right: 12px;
+    width: 14px;
+    height: 14px;
     object-fit: contain;
     opacity: 0.7;
   }
 
-  .mmq-hexacore-card:hover {
-    border-color: rgba(235, 112, 56, 0.3);
-    background: linear-gradient(0deg, rgba(103, 103, 115, 0.2), rgba(103, 103, 115, 0.2)),
-      linear-gradient(0deg, rgba(235, 112, 56, 0.15), rgba(235, 112, 56, 0.15));
-  }
-  .mmq-hexacore-card:hover .mmq-card-main-icon {
-    filter: invert(57%) sepia(61%) saturate(2371%) hue-rotate(339deg) brightness(101%) contrast(96%);
-  }
-
   .mmq-visuals-background {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    margin-top: 40px;
-    margin-bottom: -100px;
+    position: absolute;
+    top: -100px; 
+    left: -20px; 
+    right: -20px;
+    height: 800px; 
+    margin: 0;
     z-index: 2;
     pointer-events: none;
-  }
-
-  .mmq-ellipse-glow-1 {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: #7a3523;
-    opacity: 0.5;
-    filter: blur(100px);
-    border-radius: 50%;
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
-  }
-
-  .mmq-ellipse-glow-2 {
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    background: #6a6a6a;
-    opacity: 0.3;
-    filter: blur(100px);
-    border-radius: 50%;
-    bottom: 0;
-    left: 10%;
+    overflow: hidden;
   }
 
   .mmq-images-container {
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-start; 
   }
 
-  .mmq-img-neon {
-    position: absolute;
-    height: 110%;
-    width: 160%;
+  .mmq-img-mobile {
+    width: 120%;
     max-width: none;
-    object-fit: cover;
-    left: -15%;
-    bottom: 10%;
-    filter: brightness(0.75);
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 80%);
-    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 80%);
+    height: auto;
+    object-fit: contain;
   }
 
-  .mmq-img-champion {
-    position: absolute;
-    height: 130%;
-    width: auto;
-    object-fit: contain;
-    right: 10%;
-    bottom: 0;
+  .mmq-img-neon, 
+  .mmq-img-champion,
+  .mmq-ellipse-glow-1, 
+  .mmq-ellipse-glow-2 {
+    display: none;
   }
+
+  .footer-container {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(101, 106, 131, 0.25);
+  }
+  .hexacore-image { width: 24px; height: 24px; object-fit: contain; }
+  .mmq-footer-text { color: rgba(255, 255, 255, 0.6); margin: 0; }
+
 
   @media screen and (min-width: 1024px) {
+    .mmq-hexacore-section {
+      padding: 20px;
+    }
+
+    .mmq-section-top-gradient {
+      top: -500px;
+      height: 500px;
+    }
+
+    .mmq-section-bottom-gradient {
+      height: 350px;
+      background: linear-gradient(0deg, #08080a 0%, rgba(8, 8, 10, 0) 100%);
+    }
+
     .mmq-section-inner {
       width: 72%;
+      flex-direction: row;
     }
 
     .mmq-main-heading-wrapper {
-      max-width: 55%;
-      margin-bottom: 120px;
+      margin-bottom: 4rem;
+      max-width: 60%;
+      text-align: left; 
     }
+
+    .mmq-responsive-heading {
+      font-size: clamp(28px, 4vw, 56px);
+      line-height: 1.05;
+    }
+
+    .mmq-mobile-block { display: inline; margin-bottom: 0; }
+    .mmq-desktop-only { display: inline; }
 
     .mmq-cards-grid {
       grid-template-columns: repeat(3, 1fr);
@@ -327,74 +347,111 @@
     }
 
     .mmq-hexacore-card {
-      padding: 24px 20px;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
+      max-width: 405px;
+      max-height: 112px;
+      padding: 0.7rem;
+      backdrop-filter: blur(24px); 
+      -webkit-backdrop-filter: blur(50%);
+    }
+
+    .mmq-card-icon-square { width: 68px; height: 68px; }
+    .mmq-card-main-icon { width: 52px; height: 52px; }
+
+    .mmq-img-mobile { display: none; }
+    .mmq-img-neon, 
+    .mmq-img-champion,
+    .mmq-ellipse-glow-1, 
+    .mmq-ellipse-glow-2 {
+      display: block;
     }
 
     .mmq-visuals-background {
-      position: absolute;
-      top: -300px;
-      right: -5%;
-      width: 75%;
-      height: 1100px;
-      margin: 0;
+      top: 45px; 
+      left: auto;
+      right: -10%;
+      width: 70%;
+      height: 900px; 
+      overflow: visible; 
     }
 
     .mmq-images-container {
       bottom: 0;
+      top: auto;
       right: 0;
+      align-items: flex-end;
     }
 
     .mmq-img-neon {
-      height: 480px;
-      width: 700px;
-      left: 10%;
-      bottom: 330px;
-      z-index: 4;
+      position: absolute;
+      height: 120%; 
+      min-height: 1050px; 
+      max-height: none !important;
+      width: auto;
+      max-width: none !important; 
+      z-index: 10;
+      object-fit: contain;
+      right: -25%; 
+      top: -15%; 
     }
 
     .mmq-img-champion {
-      height: 1100px;
-      size: 135%;
-      left: 15%;
-      bottom: 40px;
+      position: absolute;
+      height: 100%; 
+      min-height: 950px; 
+      max-height: none !important;
+      width: auto;
+      max-width: none !important; 
+      left: auto;
+      right: -20%;
+      bottom: 12%; 
+      object-fit: contain;
+      object-position: bottom center;
+      z-index: 100;
     }
 
     .mmq-ellipse-glow-1 {
-      width: 300px;
-      height: 300px;
-      filter: blur(140px);
-      left: 50%;
-      top: 40%;
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: #7a3523;
+      opacity: 0.5;
+      filter: blur(120px);
+      border-radius: 50%;
+      left: 45%;
+      top: 30%;
     }
 
     .mmq-ellipse-glow-2 {
-      width: 600px;
-      height: 600px;
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: #6a6a6a;
+      opacity: 0.3;
       filter: blur(110px);
-      left: 35%;
-      top: 20%;
+      border-radius: 50%;
+      left: 30%;
+      top: 10%;
     }
-  }
 
-  .footer-container {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 2rem;
-    border-width: 1px 0px 1px 0px;
-    border-style: solid;
-    border-color: #656a8340;
-  }
-  .hexacore-image {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-  }
-  .mmq-footer-text {
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0;
+    .footer-container { margin-top: 1.5rem; padding-top: 1rem; }
+
+    .mmq-hexacore-card:hover {
+      border-color: rgba(235, 112, 56, 0.3);
+      background: linear-gradient(0deg, rgba(103, 103, 115, 0.2), rgba(103, 103, 115, 0.2)),
+        linear-gradient(0deg, rgba(235, 112, 56, 0.15), rgba(235, 112, 56, 0.15));
+    }
+    
+    .mmq-hexacore-card:hover .mmq-card-main-icon {
+      filter: invert(57%) sepia(61%) saturate(2371%) hue-rotate(339deg) brightness(101%) contrast(96%);
+    }
+
+    .mmq-hexacore-card:hover .mmq-card-icon-square::before {
+      opacity: 1;
+    }
+
+    .mmq-hexacore-card:hover .mmq-card-icon-square {
+      border-color: rgba(235, 112, 56, 0.3);
+    }
   }
 </style>
 
@@ -408,13 +465,31 @@
       "type": "text",
       "id": "heading_line_1",
       "label": "Heading Line 1 (White)",
-      "default": "MEET HEXACORE OUR UNIQUE"
+      "default": "MEET HEXACORE"
     },
     {
       "type": "text",
-      "id": "heading_line_2",
-      "label": "Heading Line 2 (Gray)",
-      "default": "SYSTEM FOR LONG-TERM HEALTH."
+      "id": "heading_line_2_white",
+      "label": "Heading Line 2 (White part)",
+      "default": "OUR UNIQUE"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2_gray",
+      "label": "Heading Line 2 (Gray part)",
+      "default": "SYSTEM"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading Line 3 (Gray)",
+      "default": "FOR LONG-TERM HEALTH"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer Text ",
+      "default": "Hexacore is our unique ecosystem, each section represents part of complex solution for your health"
     }
   ],
   "blocks": [
@@ -451,18 +526,6 @@
           "id": "text",
           "label": "Popisek karty",
           "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        }
-      ]
-    },
-    {
-      "type": "footer",
-      "name": "Footer",
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Footer text",
-          "default": "Hexacore is our unique ecosystem, each section represents part of complex solution for your health"
         }
       ]
     }
