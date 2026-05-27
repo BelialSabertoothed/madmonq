@@ -1,0 +1,339 @@
+  .mmq-hexacore-section {
+    position: relative;
+    background-color: #08080a;
+    width: 100%;
+    padding: 40px 20px;
+    clip-path: inset(-1000px -1000px 0px -1000px);
+  }
+
+  .mmq-section-top-gradient {
+    position: absolute;
+    top: -200px;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(8, 8, 10, 0) 0%, rgba(8, 8, 10, 0.8) 60%, #08080a 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .mmq-section-bottom-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80%;
+    background: linear-gradient(0deg, #08080a 50%, rgba(8, 8, 10, 0) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .mmq-section-inner {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mmq-content-foreground {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+  }
+
+  .mmq-main-heading-wrapper {
+    margin-bottom: 2rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .mmq-responsive-heading {
+    font-size: clamp(36px, 10vw, 42px);
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .mmq-mobile-block {
+    display: block;
+    margin-bottom: 4px;
+  }
+  .mmq-desktop-only {
+    display: none;
+  }
+
+  .mmq-main-heading-white { color: #ffffff; }
+  .mmq-main-heading-gray { color: #535353; }
+
+  .mmq-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    position: relative;
+    z-index: 20;
+    width: 100%;
+  }
+
+  .mmq-hexacore-card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 0.7rem;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(20%);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .mmq-card-icon-square {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid #FFFFFF05;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .mmq-card-icon-square::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(235, 112, 56, 0.45) 0%, rgba(235, 112, 56, 0) 65%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+    border: 1px solid;
+    border-image-source: linear-gradient(225deg, #FA763A 0%, rgba(250, 118, 58, 0) 50%);
+  }
+
+  .mmq-card-main-icon {
+    position: relative;
+    z-index: 1;
+    width: 44px; 
+    height: 44px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+  }
+
+  .mmq-card-content { flex-grow: 1; }
+  .mmq-card-title { color: #ffffff; margin: 0 0 4px 0; font-size: 1.1rem; letter-spacing: -0.5px; }
+  .mmq-card-desc { color: rgba(255, 255, 255, 0.6); margin: 0; font-size: 0.9rem; }
+  
+  .mmq-card-corner-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    opacity: 0.7;
+  }
+
+  .mmq-visuals-background {
+    position: absolute;
+    top: -100px; 
+    left: -20px; 
+    right: -20px;
+    height: 800px; 
+    margin: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .mmq-images-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+  }
+
+  .mmq-img-mobile {
+    width: 120%;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .mmq-img-neon, 
+  .mmq-img-champion,
+  .mmq-ellipse-glow-1, 
+  .mmq-ellipse-glow-2 {
+    display: none;
+  }
+
+  .footer-container {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(101, 106, 131, 0.25);
+  }
+  .hexacore-image { width: 24px; height: 24px; object-fit: contain; }
+  .mmq-footer-text { color: rgba(255, 255, 255, 0.6); margin: 0; }
+
+
+  @media screen and (min-width: 1024px) {
+    .mmq-hexacore-section {
+      padding: 20px;
+    }
+
+    .mmq-section-top-gradient {
+      top: -500px;
+      height: 500px;
+    }
+
+    .mmq-section-bottom-gradient {
+      height: 350px;
+      background: linear-gradient(0deg, #08080a 0%, rgba(8, 8, 10, 0) 100%);
+    }
+
+    .mmq-section-inner {
+      width: 72%;
+      flex-direction: row;
+    }
+
+    .mmq-main-heading-wrapper {
+      margin-bottom: 4rem;
+      max-width: 60%;
+      text-align: left; 
+    }
+
+    .mmq-responsive-heading {
+      font-size: clamp(28px, 4vw, 56px);
+      line-height: 1.05;
+    }
+
+    .mmq-mobile-block { display: inline; margin-bottom: 0; }
+    .mmq-desktop-only { display: inline; }
+
+    .mmq-cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .mmq-hexacore-card {
+      max-width: 405px;
+      max-height: 112px;
+      padding: 0.7rem;
+      backdrop-filter: blur(24px); 
+      -webkit-backdrop-filter: blur(50%);
+    }
+
+    .mmq-card-icon-square { width: 68px; height: 68px; }
+    .mmq-card-main-icon { width: 52px; height: 52px; }
+
+    .mmq-img-mobile { display: none; }
+    .mmq-img-neon, 
+    .mmq-img-champion,
+    .mmq-ellipse-glow-1, 
+    .mmq-ellipse-glow-2 {
+      display: block;
+    }
+
+    .mmq-visuals-background {
+      top: 45px; 
+      left: auto;
+      right: -10%;
+      width: 70%;
+      height: 900px; 
+      overflow: visible; 
+    }
+
+    .mmq-images-container {
+      bottom: 0;
+      top: auto;
+      right: 0;
+      align-items: flex-end;
+    }
+
+    .mmq-img-neon {
+      position: absolute;
+      height: 120%; 
+      min-height: 1050px; 
+      max-height: none !important;
+      width: auto;
+      max-width: none !important; 
+      z-index: 10;
+      object-fit: contain;
+      right: -25%; 
+      top: -15%; 
+    }
+
+    .mmq-img-champion {
+      position: absolute;
+      height: 100%; 
+      min-height: 950px; 
+      max-height: none !important;
+      width: auto;
+      max-width: none !important; 
+      left: auto;
+      right: -20%;
+      bottom: 12%; 
+      object-fit: contain;
+      object-position: bottom center;
+      z-index: 100;
+    }
+
+    .mmq-ellipse-glow-1 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: #7a3523;
+      opacity: 0.5;
+      filter: blur(120px);
+      border-radius: 50%;
+      left: 45%;
+      top: 30%;
+    }
+
+    .mmq-ellipse-glow-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: #6a6a6a;
+      opacity: 0.3;
+      filter: blur(110px);
+      border-radius: 50%;
+      left: 30%;
+      top: 10%;
+    }
+
+    .footer-container { margin-top: 1.5rem; padding-top: 1rem; }
+
+    .mmq-hexacore-card:hover {
+      border-color: rgba(235, 112, 56, 0.3);
+      background: linear-gradient(0deg, rgba(103, 103, 115, 0.2), rgba(103, 103, 115, 0.2)),
+        linear-gradient(0deg, rgba(235, 112, 56, 0.15), rgba(235, 112, 56, 0.15));
+    }
+    
+    .mmq-hexacore-card:hover .mmq-card-main-icon {
+      filter: invert(57%) sepia(61%) saturate(2371%) hue-rotate(339deg) brightness(101%) contrast(96%);
+    }
+
+    .mmq-hexacore-card:hover .mmq-card-icon-square::before {
+      opacity: 1;
+    }
+
+    .mmq-hexacore-card:hover .mmq-card-icon-square {
+      border-color: rgba(235, 112, 56, 0.3);
+    }
+  }

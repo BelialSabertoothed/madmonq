@@ -16,10 +16,16 @@
     "features": {
       "type": "hexacore",
       "settings": {}
+    },
+    "subscribe": {
+      "type": "subscriber-cards",
+      "settings": {}
     }
+
   },
   "order": [
     "main",
-    "features"
+    "features",
+    "subscribe"
   ]
 }

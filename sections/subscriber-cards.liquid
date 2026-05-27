@@ -1,0 +1,222 @@
+{{ 'section-subscriber-cards.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} .subscriber-section::before {
+    background-image: url('{{ "products.png" | asset_url }}');
+  }
+{% endstyle %}
+
+<div class="subscriber-section">
+        <div class="heading-wrapper">
+        <h2 class="h2 responsive-heading">
+          {%- if section.settings.heading_line_white != blank or section.settings.heading_line_gray != blank -%}
+            <span class="heading-white">{{ section.settings.heading_line_white }}</span> 
+            <span class="heading-gray">{{ section.settings.heading_line_gray }}</span>
+          {%- endif -%}
+        </h2>
+      </div>
+  <div class="subscriber-grid">
+
+    
+    {%- for block in section.blocks -%}
+      <div class="subscriber-card" {{ block.shopify_attributes }}>
+        
+        {%- if block.settings.bg_image != blank -%}
+          <img class="layer-bg" 
+               src="{{ block.settings.bg_image | image_url: width: 800 }}" 
+               alt="{{ block.settings.bg_image.alt | default: block.settings.title | escape }}" 
+               width="{{ block.settings.bg_image.width }}" 
+               height="{{ block.settings.bg_image.height }}"
+               loading="lazy">
+        {%- endif -%}
+
+        {%- for i in (1..2) -%}
+          {%- assign current_shape = block.settings.shape_bottom -%}
+          {%- assign current_color = block.settings.color_bottom -%}
+          {%- assign shape_layer_class = 'layer-shape--bottom' -%}
+          
+          {%- if i == 2 -%}
+            {%- assign current_shape = block.settings.shape_top -%}
+            {%- assign current_color = block.settings.color_top -%}
+            {%- assign shape_layer_class = 'layer-shape--top' -%}
+          {%- endif -%}
+
+          <div class="layer-shape {{ shape_layer_class }} shape-color-{{ current_color }}">
+            {%- case current_shape -%}
+              
+              {%- when 'wave' -%}
+                <div class="decor-wave">
+                  {%- for j in (1..10) -%}
+                    <div class="wave-bar"><div class="wave-line"></div></div>
+                  {%- endfor -%}
+                </div>
+              
+              {%- when 'orbits' -%}
+                <div class="decor-orbits">
+                  <div class="orbit-ring orbit-ring-1"></div>
+                  <div class="orbit-ring orbit-ring-2"></div>
+                  <div class="orbit-dot orbit-dot-1"></div>
+                  <div class="orbit-dot orbit-dot-2"></div>
+                </div>
+
+              {%- when 'moon' -%}
+                <div class="decor-moon">
+                  <div class="moon-circle">
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M16.7967 28.75C13.7279 28.75 10.9116 27.8546 8.42052 26.0791C5.57361 24.0511 3.72158 21.3304 2.92185 17.9861C2.63103 16.7769 2.52389 15.5256 2.5966 14.2667C2.76496 11.4389 3.7522 8.8752 5.53534 6.64818C7.43711 4.27193 9.91285 2.63801 12.8937 1.78853C13.7011 1.55894 14.5582 1.40206 15.5187 1.31022C16.5518 1.20691 17.6615 1.23752 18.8975 1.3944C19.8809 1.52451 20.6538 2.23623 20.8222 3.17372C20.9944 4.12652 20.4434 5.07932 19.4829 5.48875C18.5569 5.88288 17.7265 6.42624 17.0225 7.10736C15.7368 8.34714 14.9753 9.74381 14.6883 11.3739C14.2827 13.6889 14.8069 15.717 16.2878 17.5766C17.4778 19.0728 18.9969 20.0179 20.9255 20.4695C21.7214 20.657 22.5556 20.7105 23.4816 20.6417C24.1551 20.5919 24.752 20.4695 25.303 20.2743C26.1219 19.9873 26.7609 20.1366 27.155 20.3164C27.5377 20.4924 28.0542 20.8598 28.3336 21.6212L28.4254 21.8776V22.8266L28.1652 23.2169C27.6754 23.9592 27.0785 24.537 26.5045 25.0498C24.7979 26.5842 22.8081 27.6633 20.5964 28.2602C19.6015 28.5281 18.5722 28.6888 17.5352 28.7385C17.2903 28.7423 17.0416 28.75 16.7967 28.75ZM14.9944 4.57805C14.5773 4.64692 14.1909 4.73111 13.8197 4.83442C11.4855 5.50023 9.62586 6.72471 8.13353 8.58821C6.76365 10.2987 6.006 12.2693 5.8759 14.4466C5.8185 15.4032 5.90269 16.3522 6.1208 17.2667C6.74834 19.8878 8.13736 21.935 10.3682 23.5192C12.4651 25.0115 14.7687 25.6735 17.3783 25.5587C18.1704 25.5204 18.9548 25.398 19.7125 25.1952C20.8107 24.9005 21.84 24.4452 22.7852 23.8406C21.8821 23.8368 20.9982 23.7488 20.1487 23.5498C17.497 22.9299 15.3197 21.5715 13.6743 19.509C11.6309 16.9453 10.8771 14.0295 11.4358 10.842C11.8337 8.57291 12.9281 6.55634 14.6883 4.85738C14.7916 4.76172 14.8949 4.66988 14.9944 4.57805Z" />
+                    </svg>
+                  </div>
+                </div>
+
+              {%- when 'bars' -%}
+                <div class="decor-bars">
+                  <div class="bar-line bar-1"></div>
+                  <div class="bar-dot bar-dot-1"></div>
+                  <div class="bar-line bar-2"></div>
+                  <div class="bar-line bar-3"></div>
+                  <div class="bar-line bar-4"></div>
+                  <div class="bar-dot bar-dot-2"></div>
+                  <div class="bar-line bar-5"></div>
+                  <div class="bar-line bar-6"></div>
+                </div>
+
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+
+        {%- if block.settings.character_image != blank -%}
+          <img class="layer-character" 
+               src="{{ block.settings.character_image | image_url: width: 600 }}" 
+               alt="Postava" 
+               width="{{ block.settings.character_image.width }}" 
+               height="{{ block.settings.character_image.height }}"
+               loading="lazy">
+        {%- endif -%}
+
+        <div class="layer-ui">
+          {%- if block.settings.badge_text != blank -%}
+            <div class="card-badge">{{ block.settings.badge_text }}</div>
+          {%- else -%}
+            <div></div>
+          {%- endif -%}
+
+          <div class="card-bottom-row">
+            <h3 class="card-title">{{ block.settings.title }}</h3>
+            {%- if block.settings.btn_link != blank -%}
+              <a href="{{ block.settings.btn_link }}" class="card-btn-plus">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </div>
+    {%- endfor -%}
+
+  </div>
+        {%- if section.settings.footer_text != blank -%}
+        <div class="footer-container" style="display: flex; align-items: center; gap: 12px;">
+          <p class="mmq-footer-text text-small">{{ section.settings.footer_text }}</p>
+        </div>
+      {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Subscriber Cards",
+  "settings": [    
+        {
+      "type": "text",
+      "id": "heading_line_white",
+      "label": "Heading Line 2 (White part)",
+      "default": "SUBSCRIBER"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_gray",
+      "label": "Heading Line 2 (Gray part)",
+      "default": "STORIES"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer Text ",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel erat at tortor convallis efficitur vitae in neque. Aenean lobortis ullamcorper consectetur. Proin tempus eget erat."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Subscriber Card",
+      "settings": [
+        { "type": "image_picker", "id": "bg_image", "label": "Podkladový obrázek" },
+        
+        { "type": "header", "content": "Tvar POD postavou (Vrstava 2)" },
+        {
+          "type": "select",
+          "id": "shape_bottom",
+          "label": "Tvar",
+          "options": [
+            { "value": "none", "label": "Žádný" },
+            { "value": "wave", "label": "Vlna (Ekvalizér)" },
+            { "value": "orbits", "label": "Orbity (Kruhy)" },
+            { "value": "moon", "label": "Ikona s měsícem" },
+            { "value": "bars", "label": "Horizontální linky" }
+          ],
+          "default": "wave"
+        },
+        {
+          "type": "select",
+          "id": "color_bottom",
+          "label": "Barva",
+          "options": [
+            { "value": "white", "label": "Bílá / Šedá" },
+            { "value": "blue", "label": "Modrá" },
+            { "value": "orange", "label": "Oranžová" },
+            { "value": "purple", "label": "Fialová" }
+          ],
+          "default": "purple"
+        },
+
+        { "type": "header", "content": "Postava (Vrstva 3)" },
+        { "type": "image_picker", "id": "character_image", "label": "Postava (PNG)" },
+
+        { "type": "header", "content": "Tvar NAD postavou (Vrstva 4)" },
+        {
+          "type": "select",
+          "id": "shape_top",
+          "label": "Tvar",
+          "options": [
+            { "value": "none", "label": "Žádný" },
+            { "value": "wave", "label": "Vlna (Ekvalizér)" },
+            { "value": "orbits", "label": "Orbity (Kruhy)" },
+            { "value": "moon", "label": "Ikona s měsícem" },
+            { "value": "bars", "label": "Horizontální linky" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "id": "color_top",
+          "label": "Barva",
+          "options": [
+            { "value": "white", "label": "Bílá / Šedá" },
+            { "value": "blue", "label": "Modrá" },
+            { "value": "orange", "label": "Oranžová" },
+            { "value": "purple", "label": "Fialová" }
+          ],
+          "default": "white"
+        },
+
+        { "type": "header", "content": "Obsah karty" },
+        { "type": "text", "id": "badge_text", "label": "Badge", "default": "PREMIUM" },
+        { "type": "text", "id": "title", "label": "Nadpis karty" },
+        { "type": "url", "id": "btn_link", "label": "Odkaz tlačítka +" }
+      ]
+    }
+  ]
+}
+{% endschema %}
