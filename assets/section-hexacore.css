@@ -3,7 +3,9 @@
     background-color: #08080a;
     width: 100%;
     padding: 40px 20px;
-    clip-path: inset(-1000px -1000px 0px -1000px);
+    clip-path: inset(-1000px 0px 0px -1000px);
+    overflow-y: visible;
+    overflow-x: clip;
   }
 
   .mmq-section-top-gradient {

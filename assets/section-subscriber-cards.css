@@ -1,23 +1,21 @@
 .subscriber-section {
   position: relative;
   z-index: 2; 
-  padding: 60px 0;
+  padding: clamp(40px, 5vw, 60px) 0;
   overflow: hidden;
-  min-height: 800px; 
 }
 
 .subscriber-section::before {
   content: "";
   position: absolute;
-  top: -25%;
-  left: -28%;
+ top: -15vw; 
+  /* ZMĚNA: Matematicky přesný střed pro 145% šířku */
+  left: -22.5%; 
   width: 145%;
   height: auto;
   aspect-ratio: 16 / 10;
-  min-height: 800px; 
-
   
-  background-position: top left;
+  background-position: top center;
   background-repeat: no-repeat;
   background-size: cover; 
   
@@ -29,10 +27,9 @@
 
 .products-interactive-overlay {
   position: absolute;
-  top: -25%;
-  left: -28%;
+  top: -15vw;
+  left: -22.5%;
   width: 145%;
-  
   height: auto;
   aspect-ratio: 16 / 10;
   
@@ -116,17 +113,17 @@
 .subscriber-section::after {
   content: "";
   position: absolute;
-  top: 18%;
+  top: 22vw;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   
-  background-position: bottom; 
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-size: 100% 100%; 
+  background-position: top center; 
+  background-repeat: cover;
+  background-size: 100% auto;
   
-  z-index: 0; 
+  z-index: 2; 
   pointer-events: none;
 }
 
@@ -456,7 +453,7 @@
 
   .heading-wrapper {
     margin-bottom: 2em;
-    margin-top: 20em;
+    margin-top: clamp(250px, 35vw, 450px);
     width: 100%;
     text-align: right;
     position: relative;
@@ -498,4 +495,63 @@
   width: 24px;
   height: 24px;
   stroke: #000;
+}
+
+@media screen and (max-width: 768px) {
+  
+  .subscriber-section::after {
+    display: none !important;
+  }
+  .carousel-btn-next, .products-interactive-overlay  {
+    display: none !important;
+  }
+
+
+  .subscriber-section::before  {
+    width: 210%; 
+    left: -50%;  
+    top: -35vw;  
+    aspect-ratio: 16 / 11;
+  }
+
+  .heading-wrapper {
+    margin-top: 40vw; 
+    padding: 0 20px;
+    text-align: center; 
+  }
+  
+  .responsive-heading {
+    margin-right: 0;
+  }
+
+  .subscriber-grid {
+    padding-left: 20px; 
+  }
+  }
+@media screen and (max-width: 1150px) {
+  .footer-container-subscriber {
+    flex-direction: column-reverse; 
+    align-items: center;
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .footer-text-right {
+    text-align: center; 
+    max-width: 100%;
+  }
+
+  .footer-tags-left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    gap: 12px;
+    width: 100%;
+    justify-content: center; 
+  }
+
+  .footer-tag {
+    font-size: 13px;
+  }
 }
