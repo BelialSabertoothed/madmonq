@@ -1,0 +1,81 @@
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 220px;
+    gap: 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .bento-card {
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-purple { background: #B2A2FF; grid-row: span 1; }
+  .card-iso { background: #A8A8A8; grid-row: span 2; justify-content: flex-end; align-items: flex-end;}
+  .card-gradient { background: linear-gradient(180deg, #FF9381 0%, #E780B0 50%, #9175D9 100%); grid-row: span 2; }
+  .card-review { background: #FFFFFF; grid-row: span 1; }
+  .card-green { background: #00B67A; grid-row: span 1; }
+  .card-image-tall { background: #A8A8A8; grid-row: span 2; }
+
+  .bento-big-text {
+    font-family: 'Vanguard CF', sans-serif;
+    font-size: 64px;
+    line-height: 0.9;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .bento-small-text {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 16px;
+    text-align: right;
+    margin-top: auto;
+  }
+  .bento-huge-text {
+    font-family: 'Vanguard CF', sans-serif;
+    font-size: 80px;
+    color: white;
+    line-height: 0.9;
+    margin: 10px 0;
+  }
+  .bento-subtitle {
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    letter-spacing: 0.3em;
+  }
+  .bento-perks {
+    display: flex;
+    gap: 15px;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+  .iso-tags {
+    text-align: right;
+    color: white;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Responzivita */
+  @media (max-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: minmax(220px, auto);
+    }
+    .card-iso, .card-gradient, .card-image-tall {
+      grid-row: span 1;
+    }
+  }

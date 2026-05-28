@@ -20,12 +20,22 @@
     "subscribe": {
       "type": "subscriber-cards",
       "settings": {}
-    }
+    },
+    "ingredients": {
+      "type": "ingredients",
+      "settings": {}
+    },
+    "bento": {
+      "type": "bento-grid",
+      "settings": {}
+    },
 
   },
   "order": [
     "main",
     "features",
-    "subscribe"
+    "subscribe",
+    "ingredients",
+    "bento"
   ]
 }

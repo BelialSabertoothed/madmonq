@@ -1,0 +1,183 @@
+{{ 'section-ingredients.css' | asset_url | stylesheet_tag }}
+
+<div class="ingredient-section" style="--bg-wave: url('{{ 'image_131.png' | asset_url }}');">
+  <div class="ingredient-container">
+    <div class="ingredient-content">
+      <span class="ingredient-subtitle">{{ section.settings.subtitle }}</span>
+      <h2 class="ingredient-title">{{ section.settings.title }}</h2>
+      <p class="ingredient-desc">
+        {{ section.settings.description | newline_to_br }}
+      </p>
+      
+      <div class="ingredients-header">
+        <span class="ingredients-title">{{ section.settings.ingredients_title }}</span>
+        <span class="ingredients-clinical">{{ section.settings.ingredients_subtitle }}</span>
+      </div>
+
+      <div class="ingredients-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'ingredient' -%}
+            <div class="ingredient-item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon -%}
+                {{ block.settings.icon | image_url: width: 150 | image_tag: class: 'ingredient-icon', loading: 'lazy', alt: block.settings.name }}
+              {%- endif -%}
+              <span class="ingredient-name">{{ block.settings.name }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="ingredient-actions">
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="buy-button">
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
+        
+        <div class="reviews">
+          <div class="stars">{{ section.settings.reviews_stars }}</div>
+          <span>{{ section.settings.reviews_text }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ingredient-image-wrapper">
+      <div class="image-gradient-bg">
+        {%- if section.settings.main_image -%}
+          {{ section.settings.main_image | image_url: width: 1000 | image_tag: class: 'main-product-image', loading: 'lazy', alt: 'Product' }}
+        {%- endif -%}
+      </div>
+      
+      <div class="tags-container">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tag' -%}
+            <span class="tag" {{ block.shopify_attributes }}>
+              {%- if block.settings.tag_icon -%}
+                {{ block.settings.tag_icon | image_url: width: 50 | image_tag: class: 'tag-custom-icon', loading: 'lazy', alt: 'Icon' }}
+              {%- endif -%}
+              {{ block.settings.tag_text }}
+            </span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ingredients",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Taylored forms for best in class products"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "You can't perform without focus."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Need laser focus and a zen-like calm? MADMONQ® is your new best friend."
+    },
+    {
+      "type": "text",
+      "id": "ingredients_title",
+      "label": "Ingredients List Title",
+      "default": "Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_subtitle",
+      "label": "Ingredients List Subtitle",
+      "default": "Based on 12 clinical studies"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Buy from €25.99"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "reviews_stars",
+      "label": "Reviews Stars",
+      "default": "★★★★★"
+    },
+    {
+      "type": "text",
+      "id": "reviews_text",
+      "label": "Reviews Text",
+      "default": "10,000+ reviews"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Product Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Ingredient Icon"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient Name",
+          "default": "Brainberry®"
+        }
+      ]
+    },
+    {
+      "type": "tag",
+      "name": "Tag",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "tag_icon",
+          "label": "Custom SVG/PNG Icon (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "tag_text",
+          "label": "Tag Text (Supports Emojis)",
+          "default": "🧠 Brain"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredients",
+      "blocks": [
+        { "type": "ingredient" },
+        { "type": "ingredient" },
+        { "type": "ingredient" },
+        { "type": "ingredient" },
+        { "type": "tag" },
+        { "type": "tag" },
+        { "type": "tag" }
+      ]
+    }
+  ]
+}
+{% endschema %}

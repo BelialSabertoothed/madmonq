@@ -1,0 +1,58 @@
+{{ 'section-bento-grid.css' | asset_url | stylesheet_tag }}
+
+<div class="bento-section" style="background-color: #000000; padding: 60px 20px;">
+  <div class="bento-grid">
+    
+    <div class="bento-card card-purple">
+      <h3 class="bento-big-text">5.2M</h3>
+      <p class="bento-small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    
+    <div class="bento-card card-iso">
+      <div class="iso-tags">
+        <span class="iso-tag">EU Made</span>
+        <span class="iso-tag">ISO 9001 Certified FDA-Registered Facility</span>
+      </div>
+    </div>
+
+    <div class="bento-card card-gradient">
+      <span class="bento-subtitle">UNIQUE SUBSCRIPTION</span>
+      <h3 class="bento-huge-text">PATH OF THE<br>MONQ</h3>
+      <div class="bento-perks">
+        <span>✓ Free gift</span>
+        <span>✓ Free-shipping</span>
+        <span>✓ VIP E-mails</span>
+      </div>
+    </div>
+
+    <div class="bento-card card-review">
+      <div class="review-avatar"></div>
+      <p class="review-text">The best product not only for gamers but also for schoolchildren or workers.</p>
+      <div class="review-meta">
+        <span class="stars">★★★★★</span>
+        <span class="reviewer">Emil R.</span>
+        <span class="date">July 2025</span>
+      </div>
+    </div>
+
+    <div class="bento-card card-green">
+      <h3 class="bento-big-text">ALL NATURAL</h3>
+    </div>
+
+    <div class="bento-card card-image-tall">
+      </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Monq Bento Grid",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Monq Bento Grid"
+    }
+  ]
+}
+{% endschema %}

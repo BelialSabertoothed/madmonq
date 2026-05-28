@@ -183,7 +183,7 @@
   pointer-events: none;
 }
 .layer-shape--bottom { z-index: 3; }
-.layer-shape--top { z-index: 5; }
+.layer-shape--top { z-index: 7; }
 
 .layer-character {
   position: absolute;
@@ -393,7 +393,7 @@
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  z-index: 5;
+  z-index: 10;
 }
 
 .footer-tags-left {
@@ -438,7 +438,7 @@
 }
 
 @media screen and (max-width: 1150px) {
-  .footer-container-subscriber { /* Opravený název třídy */
+  .footer-container-subscriber {
     flex-direction: column; 
     align-items: flex-start;
     gap: 24px;
