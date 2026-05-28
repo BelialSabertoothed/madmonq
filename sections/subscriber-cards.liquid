@@ -4,131 +4,254 @@
   #shopify-section-{{ section.id }} .subscriber-section::before {
     background-image: url('{{ "products.png" | asset_url }}');
   }
+  #shopify-section-{{ section.id }} .subscriber-section::after {
+    background-image: url('{{ "grid.svg" | asset_url }}');
+  }
 {% endstyle %}
 
-<div class="subscriber-section">
-        <div class="heading-wrapper">
-        <h2 class="h2 responsive-heading">
-          {%- if section.settings.heading_line_white != blank or section.settings.heading_line_gray != blank -%}
-            <span class="heading-white">{{ section.settings.heading_line_white }}</span> 
-            <span class="heading-gray">{{ section.settings.heading_line_gray }}</span>
-          {%- endif -%}
-        </h2>
+<div class="subscriber-section full-width">
+  <div class="products-interactive-overlay">
+  
+    <div class="product-hotspot" style="top: 44%; left: 38%; --prod-color: #00B67A;">
+      <div class="hotspot-glow"></div>
+      <div class="hotspot-bubble">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span>GREENS / NUTRITION</span>
       </div>
-  <div class="subscriber-grid">
+    </div>
 
-    
-    {%- for block in section.blocks -%}
-      <div class="subscriber-card" {{ block.shopify_attributes }}>
-        
-        {%- if block.settings.bg_image != blank -%}
-          <img class="layer-bg" 
-               src="{{ block.settings.bg_image | image_url: width: 800 }}" 
-               alt="{{ block.settings.bg_image.alt | default: block.settings.title | escape }}" 
-               width="{{ block.settings.bg_image.width }}" 
-               height="{{ block.settings.bg_image.height }}"
-               loading="lazy">
-        {%- endif -%}
+    <div class="product-hotspot" style="top: 40%; left: 50%; --prod-color: #F97F46;">
+      <div class="hotspot-glow"></div>
+      <div class="hotspot-bubble">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span>CHAMPION / IMMUNITY SUPPORT</span>
+      </div>
+    </div>
 
-        {%- for i in (1..2) -%}
-          {%- assign current_shape = block.settings.shape_bottom -%}
-          {%- assign current_color = block.settings.color_bottom -%}
-          {%- assign shape_layer_class = 'layer-shape--bottom' -%}
-          
-          {%- if i == 2 -%}
-            {%- assign current_shape = block.settings.shape_top -%}
-            {%- assign current_color = block.settings.color_top -%}
-            {%- assign shape_layer_class = 'layer-shape--top' -%}
+    <div class="product-hotspot" style="top: 38%; left: 56%; --prod-color: #7858DA;">
+      <div class="hotspot-glow"></div>
+      <div class="hotspot-bubble">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span>MADMONQ / FOCUS</span>
+      </div>
+    </div>
+
+
+
+    <div class="product-hotspot" style="top: 32%; left: 65%; --prod-color: #35BADA;">
+      <div class="hotspot-glow"></div>
+      <div class="hotspot-bubble">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span>Zen plus / sleep support</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="heading-wrapper">
+    <h2 class="h2 responsive-heading">
+      {%- if section.settings.heading_line_white != blank or section.settings.heading_line_gray != blank -%}
+        <span class="heading-white">{{ section.settings.heading_line_white }}</span>
+        <span class="heading-gray">{{ section.settings.heading_line_gray }}</span>
+      {%- endif -%}
+    </h2>
+  </div>
+  <div class="carousel-wrapper">
+    <div class="subscriber-grid">
+      {%- for block in section.blocks -%}
+        <div class="subscriber-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.bg_image != blank -%}
+            <img
+              class="layer-bg"
+              src="{{ block.settings.bg_image | image_url: width: 800 }}"
+              alt="{{ block.settings.bg_image.alt | default: block.settings.title | escape }}"
+              width="{{ block.settings.bg_image.width }}"
+              height="{{ block.settings.bg_image.height }}"
+              loading="lazy"
+            >
           {%- endif -%}
 
-          <div class="layer-shape {{ shape_layer_class }} shape-color-{{ current_color }}">
-            {%- case current_shape -%}
-              
-              {%- when 'wave' -%}
-                <div class="decor-wave">
-                  {%- for j in (1..10) -%}
-                    <div class="wave-bar"><div class="wave-line"></div></div>
-                  {%- endfor -%}
-                </div>
-              
-              {%- when 'orbits' -%}
+          {%- for i in (1..2) -%}
+            {%- assign current_shape = block.settings.shape_bottom -%}
+            {%- assign current_color = block.settings.color_bottom -%}
+            {%- assign shape_layer_class = 'layer-shape--bottom' -%}
+
+            {%- if i == 2 -%}
+              {%- assign current_shape = block.settings.shape_top -%}
+              {%- assign current_color = block.settings.color_top -%}
+              {%- assign shape_layer_class = 'layer-shape--top' -%}
+            {%- endif -%}
+
+            <div class="layer-shape {{ shape_layer_class }} shape-color-{{ current_color }}">
+              {%- case current_shape -%}
+                {%- when 'wave' -%}
+                  <div class="decor-wave">
+                    {%- for j in (1..10) -%}
+                      <div class="wave-bar"><div class="wave-line"></div></div>
+                    {%- endfor -%}
+                  </div>
+
+               {%- when 'orbits' -%}
                 <div class="decor-orbits">
-                  <div class="orbit-ring orbit-ring-1"></div>
-                  <div class="orbit-ring orbit-ring-2"></div>
-                  <div class="orbit-dot orbit-dot-1"></div>
-                  <div class="orbit-dot orbit-dot-2"></div>
+                  <svg viewBox="0 0 153 255" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M78.2375 25.9928C101.153 39.7295 119.677 59.7155 131.637 83.6067" stroke="var(--shape-main)" stroke-width="12" stroke-linecap="round"/>
+                    <g filter="url(#filter0_d_0_1)">
+                      <circle cx="105.5" cy="47" r="7" fill="var(--shape-dot)"/>
+                    </g>
+                    <path d="M138.265 99.1061C147.454 124.751 148.99 152.514 142.686 179.016C136.381 205.517 122.509 229.615 102.756 248.375" stroke="var(--shape-main)" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M6 6C25.768 6 45.3136 10.1715 63.3592 18.2418" stroke="var(--shape-main)" stroke-width="12" stroke-linecap="round"/>
+                    <path opacity="0.7" d="M36.12 25.6214C61.2739 33.5105 83.542 48.6439 100.137 69.1273C116.732 89.6107 126.916 114.534 129.415 140.777" stroke="var(--shape-main)" stroke-width="12" stroke-linecap="round"/>
+                    
+                    <circle cx="108.5" cy="67" r="7" fill="var(--shape-dot)"/>
+                    
+                    <defs>
+                      <filter id="filter0_d_0_1" x="83.5" y="25" width="44" height="44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset/>
+                        <feGaussianBlur stdDeviation="7.5"/>
+                        <feComposite in2="hardAlpha" operator="out"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
+                      </filter>
+                    </defs>
+                  </svg>
                 </div>
 
               {%- when 'moon' -%}
                 <div class="decor-moon">
-                  <div class="moon-circle">
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M16.7967 28.75C13.7279 28.75 10.9116 27.8546 8.42052 26.0791C5.57361 24.0511 3.72158 21.3304 2.92185 17.9861C2.63103 16.7769 2.52389 15.5256 2.5966 14.2667C2.76496 11.4389 3.7522 8.8752 5.53534 6.64818C7.43711 4.27193 9.91285 2.63801 12.8937 1.78853C13.7011 1.55894 14.5582 1.40206 15.5187 1.31022C16.5518 1.20691 17.6615 1.23752 18.8975 1.3944C19.8809 1.52451 20.6538 2.23623 20.8222 3.17372C20.9944 4.12652 20.4434 5.07932 19.4829 5.48875C18.5569 5.88288 17.7265 6.42624 17.0225 7.10736C15.7368 8.34714 14.9753 9.74381 14.6883 11.3739C14.2827 13.6889 14.8069 15.717 16.2878 17.5766C17.4778 19.0728 18.9969 20.0179 20.9255 20.4695C21.7214 20.657 22.5556 20.7105 23.4816 20.6417C24.1551 20.5919 24.752 20.4695 25.303 20.2743C26.1219 19.9873 26.7609 20.1366 27.155 20.3164C27.5377 20.4924 28.0542 20.8598 28.3336 21.6212L28.4254 21.8776V22.8266L28.1652 23.2169C27.6754 23.9592 27.0785 24.537 26.5045 25.0498C24.7979 26.5842 22.8081 27.6633 20.5964 28.2602C19.6015 28.5281 18.5722 28.6888 17.5352 28.7385C17.2903 28.7423 17.0416 28.75 16.7967 28.75ZM14.9944 4.57805C14.5773 4.64692 14.1909 4.73111 13.8197 4.83442C11.4855 5.50023 9.62586 6.72471 8.13353 8.58821C6.76365 10.2987 6.006 12.2693 5.8759 14.4466C5.8185 15.4032 5.90269 16.3522 6.1208 17.2667C6.74834 19.8878 8.13736 21.935 10.3682 23.5192C12.4651 25.0115 14.7687 25.6735 17.3783 25.5587C18.1704 25.5204 18.9548 25.398 19.7125 25.1952C20.8107 24.9005 21.84 24.4452 22.7852 23.8406C21.8821 23.8368 20.9982 23.7488 20.1487 23.5498C17.497 22.9299 15.3197 21.5715 13.6743 19.509C11.6309 16.9453 10.8771 14.0295 11.4358 10.842C11.8337 8.57291 12.9281 6.55634 14.6883 4.85738C14.7916 4.76172 14.8949 4.66988 14.9944 4.57805Z" />
-                    </svg>
+                  <svg viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M56 3.5C67.8935 3.5 79.4346 7.53841 88.7333 14.9539C98.032 22.3694 104.537 32.7225 107.184 44.3179C109.83 55.9132 108.461 68.0636 103.301 78.7792C98.1402 89.4949 89.4942 98.1408 78.7785 103.301C68.0627 108.461 55.9124 109.83 44.3171 107.184C32.7218 104.537 22.3688 98.0315 14.9534 88.7327C7.53805 79.4339 3.49982 67.8927 3.5 55.9992C3.50018 44.1057 7.53877 32.5647 14.9544 23.2661" stroke="var(--shape-main)" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M57.7967 69.75C54.7279 69.75 51.9116 68.8546 49.4205 67.0791C46.5736 65.0511 44.7216 62.3304 43.9218 58.9861C43.631 57.7769 43.5239 56.5256 43.5966 55.2667C43.765 52.4389 44.7522 49.8752 46.5353 47.6482C48.4371 45.2719 50.9129 43.638 53.8937 42.7885C54.7011 42.5589 55.5582 42.4021 56.5187 42.3102C57.5518 42.2069 58.6615 42.2375 59.8975 42.3944C60.8809 42.5245 61.6538 43.2362 61.8222 44.1737C61.9944 45.1265 61.4434 46.0793 60.4829 46.4888C59.5569 46.8829 58.7265 47.4262 58.0225 48.1074C56.7368 49.3471 55.9753 50.7438 55.6883 52.3739C55.2827 54.6889 55.8069 56.717 57.2878 58.5766C58.4778 60.0728 59.9969 61.0179 61.9255 61.4695C62.7214 61.657 63.5556 61.7105 64.4816 61.6417C65.1551 61.5919 65.752 61.4695 66.303 61.2743C67.1219 60.9873 67.7609 61.1366 68.155 61.3164C68.5377 61.4924 69.0542 61.8598 69.3336 62.6212L69.4254 62.8776V63.8266L69.1652 64.2169C68.6754 64.9592 68.0785 65.537 67.5045 66.0498C65.7979 67.5842 63.8081 68.6633 61.5964 69.2602C60.6015 69.5281 59.5722 69.6888 58.5352 69.7385C58.2903 69.7423 58.0416 69.75 57.7967 69.75ZM55.9944 45.578C55.5773 45.6469 55.1909 45.7311 54.8197 45.8344C52.4855 46.5002 50.6259 47.7247 49.1335 49.5882C47.7636 51.2987 47.006 53.2693 46.8759 55.4466C46.8185 56.4032 46.9027 57.3522 47.1208 58.2667C47.7483 60.8878 49.1374 62.935 51.3682 64.5192C53.4651 66.0115 55.7687 66.6735 58.3783 66.5587C59.1704 66.5204 59.9548 66.398 60.7125 66.1952C61.8107 65.9005 62.84 65.4452 63.7852 64.8406C62.8821 64.8368 61.9982 64.7488 61.1487 64.5498C58.497 63.9299 56.3197 62.5715 54.6743 60.509C52.6309 57.9453 51.8771 55.0295 52.4358 51.842C52.8337 49.5729 53.9281 47.5563 55.6883 45.8574C55.7916 45.7617 55.8949 45.6699 55.9944 45.578Z" fill="var(--shape-main)"/>
+                  </svg>
+                </div>
+
+                {%- when 'bars' -%}
+                  <div class="decor-bars">
+                    <div class="bar-line bar-1"></div>
+                    <div class="bar-dot bar-dot-1"></div>
+                    <div class="bar-line bar-2"></div>
+                    <div class="bar-line bar-3"></div>
+                    <div class="bar-line bar-4"></div>
+                    <div class="bar-dot bar-dot-2"></div>
+                    <div class="bar-line bar-5"></div>
+                    <div class="bar-line bar-6"></div>
                   </div>
-                </div>
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
 
-              {%- when 'bars' -%}
-                <div class="decor-bars">
-                  <div class="bar-line bar-1"></div>
-                  <div class="bar-dot bar-dot-1"></div>
-                  <div class="bar-line bar-2"></div>
-                  <div class="bar-line bar-3"></div>
-                  <div class="bar-line bar-4"></div>
-                  <div class="bar-dot bar-dot-2"></div>
-                  <div class="bar-line bar-5"></div>
-                  <div class="bar-line bar-6"></div>
-                </div>
-
-            {%- endcase -%}
-          </div>
-        {%- endfor -%}
-
-        {%- if block.settings.character_image != blank -%}
-          <img class="layer-character" 
-               src="{{ block.settings.character_image | image_url: width: 600 }}" 
-               alt="Postava" 
-               width="{{ block.settings.character_image.width }}" 
-               height="{{ block.settings.character_image.height }}"
-               loading="lazy">
-        {%- endif -%}
-
-        <div class="layer-ui">
-          {%- if block.settings.badge_text != blank -%}
-            <div class="card-badge">{{ block.settings.badge_text }}</div>
-          {%- else -%}
-            <div></div>
+          {%- if block.settings.character_image != blank -%}
+            <img
+              class="layer-character"
+              src="{{ block.settings.character_image | image_url: width: 600 }}"
+              alt="Postava"
+              width="{{ block.settings.character_image.width }}"
+              height="{{ block.settings.character_image.height }}"
+              loading="lazy"
+            >
           {%- endif -%}
 
-          <div class="card-bottom-row">
-            <h3 class="card-title">{{ block.settings.title }}</h3>
-            {%- if block.settings.btn_link != blank -%}
-              <a href="{{ block.settings.btn_link }}" class="card-btn-plus">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-              </a>
+          <div class="layer-ui">
+            {%- if block.settings.badge_text != blank -%}
+              <div class="card-badge">{{ block.settings.badge_text }}</div>
+            {%- else -%}
+              <div></div>
             {%- endif -%}
+
+            <div class="card-bottom-row">
+              <h3 class="card-title">{{ block.settings.title }}</h3>
+              {%- if block.settings.btn_link != blank -%}
+                <a href="{{ block.settings.btn_link }}" class="card-btn-plus">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </a>
+              {%- endif -%}
+            </div>
           </div>
         </div>
-
-      </div>
-    {%- endfor -%}
-
+      {%- endfor -%}
+    </div>
+    {%- if section.blocks.size >= 4 -%}
+      <button class="carousel-btn-next" aria-label="Posunout doprava">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    {%- endif -%}
   </div>
-        {%- if section.settings.footer_text != blank -%}
-        <div class="footer-container" style="display: flex; align-items: center; gap: 12px;">
-          <p class="mmq-footer-text text-small">{{ section.settings.footer_text }}</p>
+
+ <div class="footer-container-subscriber">
+    
+    <div class="footer-tags-left">
+      {%- if section.settings.tag_1 != blank -%}
+        <div class="footer-tag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tag-icon">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+          <span>{{ section.settings.tag_1 }}</span>
         </div>
       {%- endif -%}
+
+      {%- if section.settings.tag_2 != blank -%}
+        <div class="footer-tag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tag-icon">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+          <span>{{ section.settings.tag_2 }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.tag_3 != blank -%}
+        <div class="footer-tag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tag-icon">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+          <span>{{ section.settings.tag_3 }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.footer_text != blank -%}
+      <div class="footer-text-right">
+        {{ section.settings.footer_text }}
+      </div>
+    {%- endif -%}
+
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "Subscriber Cards",
-  "settings": [    
-        {
+  "settings": [
+    {
       "type": "text",
       "id": "heading_line_white",
       "label": "Heading Line 2 (White part)",
@@ -141,10 +264,28 @@
       "default": "STORIES"
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "footer_text",
-      "label": "Footer Text ",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel erat at tortor convallis efficitur vitae in neque. Aenean lobortis ullamcorper consectetur. Proin tempus eget erat."
+      "label": "Footer Text",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel erat at tortor convallis efficitur vitae in neque.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tag_1",
+      "label": "Tag 1",
+      "default": "free gift"
+    },
+    {
+      "type": "text",
+      "id": "tag_2",
+      "label": "Tag 2",
+      "default": "Free-shipping"
+    },
+    {
+      "type": "text",
+      "id": "tag_3",
+      "label": "Tag 3",
+      "default": "Vip E-mails"
     }
   ],
   "blocks": [
@@ -153,7 +294,7 @@
       "name": "Subscriber Card",
       "settings": [
         { "type": "image_picker", "id": "bg_image", "label": "Podkladový obrázek" },
-        
+
         { "type": "header", "content": "Tvar POD postavou (Vrstava 2)" },
         {
           "type": "select",
@@ -220,3 +361,22 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sectionId = '#shopify-section-{{ section.id }}';
+    const grid = document.querySelector(`${sectionId} .subscriber-grid`);
+    const nextBtn = document.querySelector(`${sectionId} .carousel-btn-next`);
+
+    if (nextBtn && grid) {
+      nextBtn.addEventListener('click', function () {
+        const firstCard = grid.querySelector('.subscriber-card');
+        if (firstCard) {
+          const gap = parseFloat(window.getComputedStyle(grid).gap) || 24;
+          const scrollAmount = firstCard.offsetWidth + gap;
+          grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      });
+    }
+  });
+</script>

@@ -51,7 +51,6 @@
   }
 
   .mmq-responsive-heading {
-    font-size: clamp(36px, 10vw, 42px);
     line-height: 1;
     margin: 0;
     text-transform: uppercase;
@@ -218,7 +217,6 @@
     }
 
     .mmq-responsive-heading {
-      font-size: clamp(28px, 4vw, 56px);
       line-height: 1.05;
     }
 

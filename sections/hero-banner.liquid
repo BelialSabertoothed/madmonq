@@ -1,5 +1,5 @@
 {{ 'section-hero-banner.css' | asset_url | stylesheet_tag }}
-
+<div class="hero-section-container" style="--bg-frame: url('{{ "Frame 174.png" | asset_url }}'); --bg-mmq: url('{{ "background-mmq.png" | asset_url }}');">
 <div class="hero-banner-wrapper">
   <div class="hero-banner" style="--bg-image: url('{{ "hero-banner.png" | asset_url }}');">
     <div class="hero-banner__rays" style="background-image: url('{{ "Rays8.png" | asset_url }}');"></div>
@@ -98,6 +98,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 {% schema %}

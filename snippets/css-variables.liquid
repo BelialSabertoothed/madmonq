@@ -22,15 +22,15 @@
     --page-width: {{ settings.max_page_width }};
     --page-margin: {{ settings.min_page_margin }}px;
     
-    --color-background: {{ settings.background_color }};
+    --color-background: #08080A; 
     --color-foreground: {{ settings.foreground_color }};
     --color-accent: {{ settings.accent_color }}; 
     --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
 
-    --font-size-h1: clamp(40px, 4.5vw, 100px);
-    --font-size-h2: clamp(2rem, 4vw + 1rem, 80px);
-    --font-size-h3: clamp(1.75rem, 3.5vw + 1rem, 64px);
-    --font-size-h4: clamp(1.5rem, 2vw + 1rem, 40px);
+    --font-size-h1: clamp(45px, 4.5vw, 100px);
+    --font-size-h2: clamp(40px, 4vw + 1rem, 80px);
+    --font-size-h3: clamp(35px 3.5vw + 1rem, 64px);
+    --font-size-h4: clamp(20, 2vw + 1rem, 40px);
 
     --font-size-sub1: clamp(16px, 1.5vw + 10px, 20px);
     --font-size-sub2: clamp(15px, 1.2vw + 8px, 18px);
@@ -41,12 +41,5 @@
 
   body {
     background-color: var(--color-background);
-    background-image:
-      url('{{ "Frame 174.png" | asset_url }}'),
-      url('{{ "background-mmq.png" | asset_url }}');
-    background-position: left top, center top;
-    background-repeat: no-repeat, no-repeat;
-    background-size: contain, cover;
-    background-attachment: fixed, fixed;
   }
 {% endstyle %}
