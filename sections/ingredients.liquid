@@ -1,183 +1,526 @@
 {{ 'section-ingredients.css' | asset_url | stylesheet_tag }}
 
 <div class="ingredient-section" style="--bg-wave: url('{{ 'image_131.png' | asset_url }}');">
-  <div class="ingredient-container">
-    <div class="ingredient-content">
-      <span class="ingredient-subtitle">{{ section.settings.subtitle }}</span>
-      <h2 class="ingredient-title">{{ section.settings.title }}</h2>
-      <p class="ingredient-desc">
-        {{ section.settings.description | newline_to_br }}
-      </p>
-      
-      <div class="ingredients-header">
-        <span class="ingredients-title">{{ section.settings.ingredients_title }}</span>
-        <span class="ingredients-clinical">{{ section.settings.ingredients_subtitle }}</span>
-      </div>
+  <div class="carousel-wrapper">
+    <div class="ingredient-carousel-grid">
+      {%- assign card_count = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          {%- assign card_count = card_count | plus: 1 -%}
 
-      <div class="ingredients-grid">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'ingredient' -%}
-            <div class="ingredient-item" {{ block.shopify_attributes }}>
-              {%- if block.settings.icon -%}
-                {{ block.settings.icon | image_url: width: 150 | image_tag: class: 'ingredient-icon', loading: 'lazy', alt: block.settings.name }}
+          <div class="ingredient-container{% if card_count == 1 %} is-active{% endif %}" {{ block.shopify_attributes }}>
+            <div class="ingredient-content">
+              {%- if block.settings.subtitle != blank -%}
+                <span class="ingredient-subtitle">{{ block.settings.subtitle }}</span>
               {%- endif -%}
-              <span class="ingredient-name">{{ block.settings.name }}</span>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+              {%- if block.settings.title != blank -%}
+                <h2 class="h2 headline-color">{{ block.settings.title }}</h2>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="ingredient-desc">
+                  {{ block.settings.description | newline_to_br }}
+                </p>
+              {%- endif -%}
 
-      <div class="ingredient-actions">
-        {%- if section.settings.button_text != blank -%}
-          <a href="{{ section.settings.button_link }}" class="buy-button">
-            {{ section.settings.button_text }}
-          </a>
+              <div class="ingredients-header">
+                <span class="ingredients-title">
+                  {%- if block.settings.ingredients_title_icon != blank -%}
+                    {{
+                      block.settings.ingredients_title_icon
+                      | image_url: width: 50
+                      | image_tag: class: 'header-custom-icon', loading: 'lazy', alt: 'Icon'
+                    }}
+                  {%- endif -%}
+                  {{ block.settings.ingredients_title }}
+                </span>
+                <span class="ingredients-clinical">
+                  {%- if block.settings.ingredients_subtitle_icon != blank -%}
+                    {{
+                      block.settings.ingredients_subtitle_icon
+                      | image_url: width: 50
+                      | image_tag: class: 'header-custom-icon', loading: 'lazy', alt: 'Icon'
+                    }}
+                  {%- endif -%}
+                  {{ block.settings.ingredients_subtitle }}
+                </span>
+              </div>
+
+              <div class="ingredients-grid">
+                {%- for i in (1..4) -%}
+                  {%- assign ing_icon_key = 'ing_' | append: i | append: '_icon' -%}
+                  {%- assign ing_name_key = 'ing_' | append: i | append: '_name' -%}
+                  {%- assign ing_icon = block.settings[ing_icon_key] -%}
+                  {%- assign ing_name = block.settings[ing_name_key] -%}
+
+                  {%- if ing_name != blank or ing_icon != blank -%}
+                    <div class="ingredient-item">
+                      {%- if ing_icon -%}
+                        {{
+                          ing_icon
+                          | image_url: width: 150
+                          | image_tag: class: 'ingredient-icon', loading: 'lazy', alt: ing_name
+                        }}
+                      {%- endif -%}
+                      {%- if ing_name != blank -%}
+                        <span class="ingredient-name">{{ ing_name }}</span>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+
+              <div class="ingredient-actions">
+                {%- if block.settings.button_text != blank -%}
+                  <a href="{{ block.settings.button_link }}" class="buy-button">
+                    {%- if block.settings.button_icon != blank -%}
+                      {{
+                        block.settings.button_icon
+                        | image_url: width: 40
+                        | image_tag: class: 'btn-icon', loading: 'lazy', alt: 'Button Icon'
+                      }}
+                    {%- endif -%}
+                    {{ block.settings.button_text }}
+                  </a>
+                {%- endif -%}
+
+                <div class="reviews">
+                  <div class="stars">{{ block.settings.reviews_stars }}</div>
+                  <span>{{ block.settings.reviews_text }}</span>
+                </div>
+                <div class="reviewer-avatars">
+                  <div class="reviewer-circle" style="background-image: url('{{ "reviewer.png" | asset_url }}');"></div>
+                  <div
+                    class="reviewer-circle"
+                    style="background-image: url('{{ "reviewer2.png" | asset_url }}');"
+                  ></div>
+                  <div
+                    class="reviewer-circle"
+                    style="background-image: url('{{ "reviewer3.png" | asset_url }}');"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ingredient-image-wrapper">
+              <div class="product-image-carousel">
+                <div class="product-carousel-track">
+                  {%- for j in (1..4) -%}
+                    {%- assign m_img_key = 'main_image_' | append: j -%}
+                    {%- assign m_img = block.settings[m_img_key] -%}
+                    {%- if m_img != blank -%}
+                      <div class="product-carousel-slide">
+                        {{
+                          m_img
+                          | image_url: width: 1000
+                          | image_tag: class: 'main-product-image', loading: 'lazy', alt: 'Product image'
+                        }}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+
+                {%- assign dot_count = 0 -%}
+                {%- for j in (1..4) -%}
+                  {%- assign m_img_key = 'main_image_' | append: j -%}
+                  {%- if block.settings[m_img_key] != blank -%}
+                    {%- assign dot_count = dot_count | plus: 1 -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- if dot_count > 1 -%}
+                  <div class="product-carousel-dots">
+                    {%- for j in (1..dot_count) -%}
+                      <button class="dot{% if forloop.first %} active{% endif %}" aria-label="Slide {{ j }}"></button>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.badge_icon != blank or block.settings.badge_text != blank -%}
+                <div class="product-badge-corner">
+                  {%- if block.settings.badge_icon != blank -%}
+                    {{
+                      block.settings.badge_icon
+                      | image_url: width: 60
+                      | image_tag: class: 'badge-icon', loading: 'lazy', alt: 'Badge'
+                    }}
+                  {%- endif -%}
+                  {%- if block.settings.badge_text != blank -%}
+                    <span class="badge-text">{{ block.settings.badge_text | newline_to_br }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              <div class="tags-container">
+                {%- for i in (1..3) -%}
+                  {%- assign tag_icon_key = 'tag_' | append: i | append: '_icon' -%}
+                  {%- assign tag_text_key = 'tag_' | append: i | append: '_text' -%}
+                  {%- assign tag_icon = block.settings[tag_icon_key] -%}
+                  {%- assign tag_text = block.settings[tag_text_key] -%}
+
+                  {%- if tag_text != blank -%}
+                    <span class="tag">
+                      {%- if tag_icon -%}
+                        {{
+                          tag_icon
+                          | image_url: width: 50
+                          | image_tag: class: 'tag-custom-icon', loading: 'lazy', alt: 'Icon'
+                        }}
+                      {%- endif -%}
+                      {{ tag_text }}
+                    </span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
         {%- endif -%}
-        
-        <div class="reviews">
-          <div class="stars">{{ section.settings.reviews_stars }}</div>
-          <span>{{ section.settings.reviews_text }}</span>
-        </div>
-      </div>
+      {%- endfor -%}
     </div>
 
-    <div class="ingredient-image-wrapper">
-      <div class="image-gradient-bg">
-        {%- if section.settings.main_image -%}
-          {{ section.settings.main_image | image_url: width: 1000 | image_tag: class: 'main-product-image', loading: 'lazy', alt: 'Product' }}
+    {%- if card_count > 1 -%}
+      <button class="carousel-btn-next" aria-label="Posunout doprava">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    {%- endif -%}
+  </div>
+
+  <div class="featured-on-container">
+    {%- if section.settings.featured_title != blank -%}
+      <div class="featured-title">{{ section.settings.featured_title }}</div>
+    {%- endif -%}
+    <div class="featured-logos-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'featured_logo' -%}
+          <div class="featured-logo-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.logo_image != blank -%}
+              {{
+                block.settings.logo_image
+                | image_url: width: 200
+                | image_tag: class: 'featured-logo-img', loading: 'lazy', alt: 'Featured Logo'
+              }}
+            {%- endif -%}
+          </div>
         {%- endif -%}
-      </div>
-      
-      <div class="tags-container">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'tag' -%}
-            <span class="tag" {{ block.shopify_attributes }}>
-              {%- if block.settings.tag_icon -%}
-                {{ block.settings.tag_icon | image_url: width: 50 | image_tag: class: 'tag-custom-icon', loading: 'lazy', alt: 'Icon' }}
-              {%- endif -%}
-              {{ block.settings.tag_text }}
-            </span>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+      {%- endfor -%}
     </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Ingredients",
+  "name": "Ingredients Carousel",
   "settings": [
     {
       "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Taylored forms for best in class products"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "You can't perform without focus."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Need laser focus and a zen-like calm? MADMONQ® is your new best friend."
-    },
-    {
-      "type": "text",
-      "id": "ingredients_title",
-      "label": "Ingredients List Title",
-      "default": "Ingredients"
-    },
-    {
-      "type": "text",
-      "id": "ingredients_subtitle",
-      "label": "Ingredients List Subtitle",
-      "default": "Based on 12 clinical studies"
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Buy from €25.99"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link"
-    },
-    {
-      "type": "text",
-      "id": "reviews_stars",
-      "label": "Reviews Stars",
-      "default": "★★★★★"
-    },
-    {
-      "type": "text",
-      "id": "reviews_text",
-      "label": "Reviews Text",
-      "default": "10,000+ reviews"
-    },
-    {
-      "type": "image_picker",
-      "id": "main_image",
-      "label": "Main Product Image"
+      "id": "featured_title",
+      "label": "Featured On Title",
+      "default": "FEATURED ON"
     }
   ],
   "blocks": [
     {
-      "type": "ingredient",
-      "name": "Ingredient",
-      "limit": 4,
+      "type": "card",
+      "name": "Karta produktu (Slide)",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "icon",
-          "label": "Ingredient Icon"
+          "type": "header",
+          "content": "Hlavní texty"
         },
         {
           "type": "text",
-          "id": "name",
-          "label": "Ingredient Name",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Taylored forms for best in class products"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "You can't perform without focus."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Need laser focus and a zen-like calm? MADMONQ® is your new best friend. We crafted the most complex formula to fuel your brain for on-demand bursts of brilliance (up to 6 hours) and long-term performance."
+        },
+        {
+          "type": "header",
+          "content": "Obrázky produktu (Slider)"
+        },
+        {
+          "type": "image_picker",
+          "id": "main_image_1",
+          "label": "Hlavní obrázek 1 (Výchozí)"
+        },
+        {
+          "type": "image_picker",
+          "id": "main_image_2",
+          "label": "Hlavní obrázek 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "main_image_3",
+          "label": "Hlavní obrázek 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "main_image_4",
+          "label": "Hlavní obrázek 4"
+        },
+        {
+          "type": "header",
+          "content": "Sekce ingrediencí uvnitř karty"
+        },
+        {
+          "type": "image_picker",
+          "id": "ingredients_title_icon",
+          "label": "Ingredients List Title - Ikona"
+        },
+        {
+          "type": "text",
+          "id": "ingredients_title",
+          "label": "Ingredients List Title",
+          "default": "Ingredients"
+        },
+        {
+          "type": "image_picker",
+          "id": "ingredients_subtitle_icon",
+          "label": "Ingredients List Subtitle - Ikona"
+        },
+        {
+          "type": "text",
+          "id": "ingredients_subtitle",
+          "label": "Ingredients List Subtitle",
+          "default": "Based on 12 clinical studies"
+        },
+        {
+          "type": "paragraph",
+          "content": "Zadejte ikony a názvy pro jednotlivé položky v mřížce (max 4):"
+        },
+        {
+          "type": "image_picker",
+          "id": "ing_1_icon",
+          "label": "Ingredience 1 - Ikona"
+        },
+        {
+          "type": "text",
+          "id": "ing_1_name",
+          "label": "Ingredience 1 - Název",
           "default": "Brainberry®"
+        },
+        {
+          "type": "image_picker",
+          "id": "ing_2_icon",
+          "label": "Ingredience 2 - Ikona"
+        },
+        {
+          "type": "text",
+          "id": "ing_2_name",
+          "label": "Ingredience 2 - Název"
+        },
+        {
+          "type": "image_picker",
+          "id": "ing_3_icon",
+          "label": "Ingredience 3 - Ikona"
+        },
+        {
+          "type": "text",
+          "id": "ing_3_name",
+          "label": "Ingredience 3 - Název"
+        },
+        {
+          "type": "image_picker",
+          "id": "ing_4_icon",
+          "label": "Ingredience 4 - Ikona"
+        },
+        {
+          "type": "text",
+          "id": "ing_4_name",
+          "label": "Ingredience 4 - Název"
+        },
+        {
+          "type": "header",
+          "content": "Akční prvky a Hodnocení"
+        },
+        {
+          "type": "image_picker",
+          "id": "button_icon",
+          "label": "Ikona na tlačítku Buy"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Buy from €25.99"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "text",
+          "id": "reviews_stars",
+          "label": "Reviews Stars",
+          "default": "★★★★★"
+        },
+        {
+          "type": "text",
+          "id": "reviews_text",
+          "label": "Reviews Text",
+          "default": "10,000+ reviews"
+        },
+        {
+          "type": "header",
+          "content": "Odznak vpravo dole (Badge)"
+        },
+        {
+          "type": "image_picker",
+          "id": "badge_icon",
+          "label": "Ikona odznaku"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Text odznaku",
+          "default": "Best Seller"
+        },
+        {
+          "type": "header",
+          "content": "Štítky (Tags) překrývající obrázek"
+        },
+        {
+          "type": "image_picker",
+          "id": "tag_1_icon",
+          "label": "Tag 1 - Ikona (Volitelná)"
+        },
+        {
+          "type": "text",
+          "id": "tag_1_text",
+          "label": "Tag 1 - Text",
+          "default": "Brain"
+        },
+        {
+          "type": "image_picker",
+          "id": "tag_2_icon",
+          "label": "Tag 2 - Ikona (Volitelná)"
+        },
+        {
+          "type": "text",
+          "id": "tag_2_text",
+          "label": "Tag 2 - Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "tag_3_icon",
+          "label": "Tag 3 - Ikona (Volitelná)"
+        },
+        {
+          "type": "text",
+          "id": "tag_3_text",
+          "label": "Tag 3 - Text"
         }
       ]
     },
     {
-      "type": "tag",
-      "name": "Tag",
-      "limit": 3,
+      "type": "featured_logo",
+      "name": "Featured Logo",
       "settings": [
         {
           "type": "image_picker",
-          "id": "tag_icon",
-          "label": "Custom SVG/PNG Icon (Optional)"
-        },
-        {
-          "type": "text",
-          "id": "tag_text",
-          "label": "Tag Text (Supports Emojis)",
-          "default": "🧠 Brain"
+          "id": "logo_image",
+          "label": "Logo firmy"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Ingredients",
+      "name": "Ingredients Carousel",
       "blocks": [
-        { "type": "ingredient" },
-        { "type": "ingredient" },
-        { "type": "ingredient" },
-        { "type": "ingredient" },
-        { "type": "tag" },
-        { "type": "tag" },
-        { "type": "tag" }
+        { "type": "card" },
+        { "type": "featured_logo" },
+        { "type": "featured_logo" },
+        { "type": "featured_logo" },
+        { "type": "featured_logo" },
+        { "type": "featured_logo" }
       ]
     }
   ]
 }
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sectionId = '#shopify-section-{{ section.id }}';
+    const grid = document.querySelector(`${sectionId} .ingredient-carousel-grid`);
+    const nextBtn = document.querySelector(`${sectionId} .carousel-btn-next`);
+    const containers = document.querySelectorAll(`${sectionId} .ingredient-container`);
+
+    // Přepínání hlavních karet (krokový carousel)
+    if (nextBtn && grid) {
+      nextBtn.addEventListener('click', function () {
+        const firstCard = grid.querySelector('.ingredient-container');
+        if (firstCard) {
+          const gap = parseFloat(window.getComputedStyle(grid).gap) || 40;
+          const scrollAmount = firstCard.offsetWidth + gap;
+          grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      });
+    }
+
+    const observerOptions = {
+      root: grid,
+      rootMargin: '0px',
+      threshold: 0.55,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-active');
+        } else {
+          entry.target.classList.remove('is-active');
+        }
+      });
+    }, observerOptions);
+
+    containers.forEach((container) => observer.observe(container));
+
+    // Logika pro mini slider v obrázku produktu
+    const imageCarousels = document.querySelectorAll(`${sectionId} .ingredient-image-wrapper`);
+    imageCarousels.forEach((wrapper) => {
+      const track = wrapper.querySelector('.product-carousel-track');
+      const dots = wrapper.querySelectorAll('.product-carousel-dots .dot');
+
+      if (track && dots.length > 0) {
+        track.addEventListener('scroll', () => {
+          const slideWidth = track.clientWidth;
+          const index = Math.round(track.scrollLeft / slideWidth);
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+        });
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+          });
+        });
+      }
+    });
+  });
+</script>

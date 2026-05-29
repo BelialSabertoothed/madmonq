@@ -84,6 +84,15 @@ h1, .h1 {
   margin-bottom: 0.5em; 
 }
 
+h1, .h0 { 
+  font-family: 'Vanguard CF', sans-serif; 
+  font-size: var(--font-size-h0, 100px); 
+  line-height: 0.96; 
+  text-transform: uppercase; 
+  font-weight: 700; 
+  margin-bottom: 0.5em; 
+}
+
 h2, .h2 { 
   font-family: 'Vanguard CF', sans-serif; 
   font-size: var(--font-size-h2, 64px); 
