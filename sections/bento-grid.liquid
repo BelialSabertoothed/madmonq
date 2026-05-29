@@ -1,57 +1,253 @@
+{%- assign s = section.settings -%}
 {{ 'section-bento-grid.css' | asset_url | stylesheet_tag }}
 
-<div class="bento-section" style="background-color: #000000; padding: 60px 20px;">
-  <div class="bento-grid">
+<div class="bento-section" style="background-color: {{ s.bg_color }};" id="Section-{{ section.id }}">
+  
+  <div class="bento-visuals-background">
+    <div class="bento-bg-gradient-left"></div>
+    <div class="bento-bg-gradient-bottom"></div>
     
-    <div class="bento-card card-purple">
-      <h3 class="bento-big-text">5.2M</h3>
-      <p class="bento-small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    
-    <div class="bento-card card-iso">
-      <div class="iso-tags">
-        <span class="iso-tag">EU Made</span>
-        <span class="iso-tag">ISO 9001 Certified FDA-Registered Facility</span>
+    <img src="{{ 'streamers.png' | asset_url }}" alt="Streamers" class="bento-hero-bg-image" loading="lazy" width="1200" height="800">
+  </div>
+
+  <div class="bento-container">
+        <div class="bento-intro">
+      <div class="bento-intro-content">
+        <img src="{{ 'stars.png' | asset_url }}" alt="5 Stars" class="intro-logo" loading="lazy" width="160" height="29">
+        
+        <h2 class="bento-title h1">
+          <span style="color: {{ s.highlight_color }}; display: block;">{{ s.heading_highlight }}</span>
+          <span style="color: #FFFFFF;">{{ s.heading_main | newline_to_br }}</span>
+        </h2>
+        
+        <p class="intro-description">{{ s.description | newline_to_br }}</p>
       </div>
     </div>
 
-    <div class="bento-card card-gradient">
-      <span class="bento-subtitle">UNIQUE SUBSCRIPTION</span>
-      <h3 class="bento-huge-text">PATH OF THE<br>MONQ</h3>
-      <div class="bento-perks">
-        <span>✓ Free gift</span>
-        <span>✓ Free-shipping</span>
-        <span>✓ VIP E-mails</span>
-      </div>
+    <div class="bento-grid">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        
+        <div class="bento-card bento-card--{{ block.type }}" 
+             style="background: {{ b.bg_color }}; --col-span: {{ b.col_span }}; --row-span: {{ b.row_span }};" 
+             {{ block.shopify_attributes }}>
+             
+          {%- case block.type -%}
+            
+            {%- when 'stat_card' -%}
+              <h3 class="bento-big-text" style="color: {{ b.text_color }};">{{ b.number }}</h3>
+              <p class="bento-small-text" style="color: {{ b.text_color }};">{{ b.text }}</p>
+
+           {%- when 'badge_card' -%}
+              {%- if b.bg_image != blank -%}
+                {{ b.bg_image | image_url: width: 600 | image_tag: class: 'bento-bg-image', loading: 'lazy', alt: '' }}
+              {%- endif -%}
+              
+              {%- if b.badge_1_img != blank or b.badge_1_text != blank -%}
+                <div class="clean-badge-wrapper">
+                  <span class="clean-badge-text">{{ b.badge_1_text }}</span>
+                  {%- if b.badge_1_img -%}
+                    {{ b.badge_1_img | image_url: width: 100 | image_tag: class: 'clean-badge-icon', loading: 'lazy', alt: b.badge_1_text }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+            {%- when 'subscription_card' -%}
+              {%- if b.bg_image != blank -%}
+                {{ b.bg_image | image_url: width: 800 | image_tag: class: 'bento-transparent-bg', loading: 'lazy', alt: '' }}
+              {%- endif -%}
+              
+              <div class="subscription-top">
+                <span class="bento-subtitle" style="color: {{ b.text_color }};">{{ b.subtitle }}</span>
+                <h3 class="bento-huge-text" style="color: {{ b.text_color }};">{{ b.title | newline_to_br }}</h3>
+              </div>
+              
+              <div class="bento-perks" style="color: {{ b.text_color }};">
+                {% if b.perk_1 != blank %}
+                  <span class="perk-item">
+                    {% if b.perk_icon != blank %}{{ b.perk_icon | image_url: width: 32 | image_tag: class: 'perk-icon', alt: '' }}{% endif %}
+                    {{ b.perk_1 }}
+                  </span>
+                {% endif %}
+                {% if b.perk_2 != blank %}
+                  <span class="perk-item">
+                    {% if b.perk_icon != blank %}{{ b.perk_icon | image_url: width: 32 | image_tag: class: 'perk-icon', alt: '' }}{% endif %}
+                    {{ b.perk_2 }}
+                  </span>
+                {% endif %}
+                {% if b.perk_3 != blank %}
+                  <span class="perk-item">
+                    {% if b.perk_icon != blank %}{{ b.perk_icon | image_url: width: 32 | image_tag: class: 'perk-icon', alt: '' }}{% endif %}
+                    {{ b.perk_3 }}
+                  </span>
+                {% endif %}
+              </div>
+              {%- when 'natural_card' -%}
+              {%- if b.bg_image != blank -%}
+                {{ b.bg_image | image_url: width: 600 | image_tag: class: 'bento-bg-image', loading: 'lazy', alt: '' }}
+              {%- endif -%}
+              <div class="bento-card-top-left" style="color: {{ b.text_color }};">
+                {{ b.text_top_left | newline_to_br }}
+              </div>
+              
+              <div class="bento-card-bottom-right" style="color: {{ b.text_color }};">
+                {{ b.text_bottom_right | newline_to_br }}
+              </div>
+          {%- when 'review_card' -%}
+              <div class="review-content-top">
+                <span class="date" style="color: {{ b.text_color }}; opacity: 0.6;">{{ b.date }}</span>
+                <p class="review-text" style="color: {{ b.text_color }};">{{ b.review_text }}</p>
+              </div>
+              
+              <div class="review-bottom-row">
+                <div class="review-stars-wrapper">
+                  {%- if b.stars_img != blank -%}
+                    {{ b.stars_img | image_url: width: 150 | image_tag: class: 'stars-img', loading: 'lazy', alt: 'Rating' }}
+                  {%- else -%}
+                    <span class="stars-text" style="color: {{ b.text_color }};">★★★★★</span>
+                  {%- endif -%}
+                </div>
+                
+                <div class="review-profile-right">
+                  <span class="reviewer" style="color: {{ b.text_color }};">{{ b.reviewer_name }}</span>
+                  {%- if b.avatar != blank -%}
+                    {{ b.avatar | image_url: width: 120 | image_tag: class: 'review-avatar-img', loading: 'lazy', alt: b.reviewer_name }}
+                  {%- else -%}
+                    <div class="review-avatar-placeholder"></div>
+                  {%- endif -%}
+                </div>
+              </div>
+
+            {%- when 'image_card' -%}
+              {%- if b.image != blank -%}
+                {{ b.image | image_url: width: 800 | image_tag: class: 'bento-full-image', loading: 'lazy', alt: '' }}
+              {%- endif -%}
+
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
     </div>
-
-    <div class="bento-card card-review">
-      <div class="review-avatar"></div>
-      <p class="review-text">The best product not only for gamers but also for schoolchildren or workers.</p>
-      <div class="review-meta">
-        <span class="stars">★★★★★</span>
-        <span class="reviewer">Emil R.</span>
-        <span class="date">July 2025</span>
-      </div>
-    </div>
-
-    <div class="bento-card card-green">
-      <h3 class="bento-big-text">ALL NATURAL</h3>
-    </div>
-
-    <div class="bento-card card-image-tall">
-      </div>
-
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Monq Bento Grid",
-  "settings": [],
+  "name": "Bento Grid",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#131418"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight (Green part)",
+      "default": "TRUSTED BY"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Color",
+      "default": "#00B67A"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_main",
+      "label": "Heading Main (White part)",
+      "default": "10,000+ CUSTOMERS,\nBORN IN GAMING"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet lobortis augue. Integer magna ipsum, facilisis vitae magna nec, lacinia porttitor massa. Donec nulla risus, viverra a tortor interdum, dapibus sollicitudin elit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat_card",
+      "name": "Number & Text",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Big Number", "default": "5.2M" },
+        { "type": "text", "id": "text", "label": "Small Text", "default": "Lorem ipsum dolor sit amet" },
+        { "type": "color_background", "id": "bg_color", "label": "Background", "default": "#B2A2FF" },
+        { "type": "color", "id": "text_color", "label": "Text Color", "default": "#000000" },
+        { "type": "range", "id": "col_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Column Span" },
+        { "type": "range", "id": "row_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Row Span" }
+      ]
+    },
+    {
+      "type": "natural_card",
+      "name": "Text & natural",
+      "settings": [
+        { "type": "textarea", "id": "text_top_left", "label": "Text vlevo nahoře", "default": "TEXT TOP\nLEFT" },
+        { "type": "textarea", "id": "text_bottom_right", "label": "Text vpravo dole", "default": "TEXT BOTTOM\nRIGHT" },
+        { "type": "image_picker", "id": "bg_image", "label": "Obrázek na pozadí" },
+        { "type": "color", "id": "bg_color", "label": "Barva pozadí", "default": "#00B67A" },
+        { "type": "color", "id": "text_color", "label": "Barva textu", "default": "#000000" },
+        { "type": "range", "id": "col_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Column Span" },
+        { "type": "range", "id": "row_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Row Span" }
+      ]
+    },
+    {
+      "type": "badge_card",
+      "name": "Image with Badges",
+      "settings": [
+        { "type": "image_picker", "id": "bg_image", "label": "Background Image" },
+        { "type": "image_picker", "id": "badge_1_img", "label": "Badge Image" },
+        { "type": "text", "id": "badge_1_text", "label": "Badge 1 Text", "default": "EU Made" },
+        { "type": "range", "id": "col_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Column Span" },
+        { "type": "range", "id": "row_span", "min": 1, "max": 3, "step": 1, "default": 2, "label": "Row Span" }
+      ]
+    },
+    {
+      "type": "subscription_card",
+      "name": "Subscription Gradient",
+      "settings": [
+        { "type": "image_picker", "id": "bg_image", "label": "Transparent Background Image" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "UNIQUE SUBSCRIPTION" },
+        { "type": "textarea", "id": "title", "label": "Title", "default": "PATH OF THE\nMONQ" },
+                { "type": "image_picker", "id": "perk_icon", "label": "Perk Icon (Small)" },
+
+        { "type": "text", "id": "perk_1", "label": "Perk 1" },
+        { "type": "text", "id": "perk_2", "label": "Perk 2" },
+        { "type": "text", "id": "perk_3", "label": "Perk 3" },
+        { "type": "color_background", "id": "bg_color", "label": "Background Gradient", "default": "linear-gradient(180deg, #FF9381 0%, #E780B0 50%, #9175D9 100%)" },
+        { "type": "color", "id": "text_color", "label": "Text Color", "default": "#FFFFFF" },
+        { "type": "range", "id": "col_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Column Span" },
+        { "type": "range", "id": "row_span", "min": 1, "max": 3, "step": 1, "default": 2, "label": "Row Span" }
+      ]
+    },
+    {
+      "type": "review_card",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar Image" },
+        { "type": "textarea", "id": "review_text", "label": "Review Text" },
+        { "type": "image_picker", "id": "stars_img", "label": "Stars Image" },
+        { "type": "text", "id": "reviewer_name", "label": "Reviewer Name" },
+        { "type": "text", "id": "date", "label": "Date" },
+        { "type": "color_background", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+        { "type": "color", "id": "text_color", "label": "Text Color", "default": "#000000" },
+        { "type": "range", "id": "col_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Column Span" },
+        { "type": "range", "id": "row_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Row Span" }
+      ]
+    },
+    {
+      "type": "image_card",
+      "name": "Tall Image Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "range", "id": "col_span", "min": 1, "max": 3, "step": 1, "default": 1, "label": "Column Span" },
+        { "type": "range", "id": "row_span", "min": 1, "max": 3, "step": 1, "default": 2, "label": "Row Span" }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Monq Bento Grid"
+      "name": "Bento Grid"
     }
   ]
 }
